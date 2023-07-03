@@ -23,9 +23,23 @@ jobs:
               run: pnpm build
             - name: Test
               run: pnpm test
+    build_dbdocs:
+        runs-on: ubuntu-latest
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        steps:
+            - uses: actions/checkout@v3
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 7.33.1
+                  run_install: false
+            - name: Install dbdocs global
+              run: pnpm add -g dbdocs
+            - name: Build DBDocs
+              run: dbdocs build ./docs/database.dbml --project=Sainseni --password=${{ secrets.DBDOCS_PASSWORD }} --output=./docs
 
     deploy:
         runs-on: ubuntu-latest
+        if: ${{ github.actor != 'dependabot[bot]' }}
         needs: build
         steps:
             - uses: actions/checkout@v3
