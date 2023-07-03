@@ -1,0 +1,30 @@
+name: Dependabot Merge
+on:
+    push:
+        branches:
+            - development
+    pull_request:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        if: ${{ github.actor == 'dependabot[bot]' }}
+        steps:
+            - uses: actions/checkout@v2
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 7.33.1
+                  run_install: false
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm build
+            - run: pnpm test
+
+    automerge:
+        needs: build
+        runs-on: ubuntu-latest
+        if: ${{ github.actor == 'dependabot[bot]' }}
+        permissions:
+            pull-requests: write
+            contents: write
+        steps:
+            - uses: fastify/github-action-merge-dependabot@v3
