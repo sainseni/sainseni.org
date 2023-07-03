@@ -7,6 +7,16 @@ on:
         branches:
             - main
 jobs:
+    migrate:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 7.33.1
+                  run_install: true
+            - name: Migrate Database
+              run: pnpm run migrate:prod
     deploy:
         runs-on: ubuntu-latest
         steps:
