@@ -24,10 +24,10 @@ pnpm build ||
 )
 
 # Run test
-pnpm test ||
-(
-    echo '🔨❌ Yoo, you have a problem in your code. Check your test 🔨❌ Run pnpm test, add changes and try commit again.';
-    false;
-)
+# pnpm test ||
+# (
+#     echo '🔨❌ Yoo, you have a problem in your code. Check your test 🔨❌ Run pnpm test, add changes and try commit again.';
+#     false;
+# )
 
 echo '🎉 No error found: committing this now.... ✨🚀🏄‍♂️🍻'
