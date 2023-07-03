@@ -30,7 +30,7 @@
         "@next/env": "^13.4.7",
         "@prisma/client": "^4.16.1",
         "@t3-oss/env-nextjs": "^0.6.0",
-        "@tanstack/react-query": "^4.29.17",
+        "@tanstack/react-query": "^4.29.19",
         "@trpc/client": "^10.32.0",
         "@trpc/next": "^10.32.0",
         "@trpc/react-query": "^10.32.0",
