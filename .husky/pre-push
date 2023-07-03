@@ -1,6 +1,11 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/_/husky.sh"
 
+# Rebase
+echo 'Rebasing your project before pushing...'
+git pull --rebase origin main
+
+# Check
 echo '🏗️👷 Checking your project before pushing'
 echo 'please be patient, this may take a while...'
 
