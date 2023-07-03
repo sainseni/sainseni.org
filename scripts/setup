@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+case "$1" in
+    "database")
+        echo "Setting up database..."
+        ./database
+        echo "Database setup complete!"
+        ;;
+    *)
+        echo "Usage: $0 { database }"
+        ;;
+esac
