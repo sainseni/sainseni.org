@@ -21,8 +21,8 @@ dependencies:
     specifier: ^1.0.7
     version: 1.0.7(@prisma/client@5.0.0)(next-auth@4.22.3)
   '@next/env':
-    specifier: ^13.4.10
-    version: 13.4.10
+    specifier: ^13.4.11
+    version: 13.4.11
   '@prisma/client':
     specifier: ^5.0.0
     version: 5.0.0(prisma@5.0.0)
@@ -2125,8 +2125,8 @@ packages:
       next-auth: 4.22.3(next@13.4.7)(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
-  /@next/env@13.4.10:
-    resolution: {integrity: sha512-3G1yD/XKTSLdihyDSa8JEsaWOELY+OWe08o0LUYzfuHp1zHDA8SObQlzKt+v+wrkkPcnPweoLH1ImZeUa0A1NQ==}
+  /@next/env@13.4.11:
+    resolution: {integrity: sha512-BbPLOkfFFca+OpwSmGhNrl56B3ZzOFS4eJ85SpGTDpjlXoz7XFfS3MMOfjUCTuW1laTrQjm98I9Q30tsYpr8ew==}
 
   /@next/env@13.4.7:
     resolution: {integrity: sha512-ZlbiFulnwiFsW9UV1ku1OvX/oyIPLtMk9p/nnvDSwI0s7vSoZdRtxXNsaO+ZXrLv/pMbXVGq4lL8TbY9iuGmVw==}
@@ -5950,7 +5950,7 @@ packages:
       next: '*'
     dependencies:
       '@corex/deepmerge': 4.0.43
-      '@next/env': 13.4.10
+      '@next/env': 13.4.11
       fast-glob: 3.3.0
       minimist: 1.2.8
       next: 13.4.7(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
