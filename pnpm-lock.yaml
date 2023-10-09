@@ -15,8 +15,8 @@ dependencies:
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.24)(react@18.2.0)
   '@fontsource-variable/nunito':
-    specifier: ^5.0.13
-    version: 5.0.13
+    specifier: ^5.0.14
+    version: 5.0.14
   '@next-auth/prisma-adapter':
     specifier: ^1.0.7
     version: 1.0.7(@prisma/client@5.4.1)(next-auth@4.23.2)
@@ -1832,8 +1832,8 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@fontsource-variable/nunito@5.0.13:
-    resolution: {integrity: sha512-F/XyvEFXtRTkAG5dEb7kZl95a4XxkTqRn5BTJdcYftun9ZHKXno5BmYANXUCy9i0DXXskDt1NXUdGRGs4aFssg==}
+  /@fontsource-variable/nunito@5.0.14:
+    resolution: {integrity: sha512-xnmZuyxe77YVOScYw9Wjw6zEqL/EPE708tG42rl39GVoJuhDQl60iFfZl6FQBZATNKeMswQsb+fGeAYeHbS+4Q==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.11:
