@@ -95,8 +95,8 @@ devDependencies:
     specifier: 20.8.7
     version: 20.8.7
   '@types/pg':
-    specifier: ^8.10.6
-    version: 8.10.6
+    specifier: ^8.10.7
+    version: 8.10.7
   '@types/react':
     specifier: 18.2.29
     version: 18.2.29
@@ -2583,8 +2583,8 @@ packages:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
     dev: false
 
-  /@types/pg@8.10.6:
-    resolution: {integrity: sha512-L9VOuJzQJJAMjk+QZ3GA0gIdFxyWKMlw7rDh94LEibY0w7YmNNlM0wl9JUCsmr691YX6DYV18UfCmU1waYfxIw==}
+  /@types/pg@8.10.7:
+    resolution: {integrity: sha512-ksJqHipwYaSEHz9e1fr6H6erjoEdNNaOxwyJgPx9bNeaqOW3iWBQgVHfpwiSAoqGzchfc+ZyRLwEfeCcyYD3uQ==}
     dependencies:
       '@types/node': 20.8.7
       pg-protocol: 1.6.0
