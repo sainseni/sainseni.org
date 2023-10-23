@@ -152,8 +152,8 @@ devDependencies:
     specifier: ^5.4.2
     version: 5.4.2
   superjson:
-    specifier: ^2.0.0
-    version: 2.0.0
+    specifier: ^2.1.0
+    version: 2.1.0
   ts-node:
     specifier: ^10.9.1
     version: 10.9.1(@types/node@20.8.7)(typescript@5.2.2)
@@ -7236,8 +7236,8 @@ packages:
     resolution: {integrity: sha512-Orov6g6BB1sDfYgzWfTHDOxamtX1bE/zo104Dh9e6fqJ3PooipYyfJ0pUmrZO2wAvO8YbEyeFrkV91XTsGMSrw==}
     dev: false
 
-  /superjson@2.0.0:
-    resolution: {integrity: sha512-W3n+NJ7TFjaLle8ihIIvsr/bbuKpnxeatsyjmhy7iSkom+/cshaHziCQAWXrHGWJVQSQFDOuES6C3nSEvcbrQg==}
+  /superjson@2.1.0:
+    resolution: {integrity: sha512-VrMxSzMeE2nLmTvxOl0gEuz45kErw5oNNIzmZJ+eCmtSO89sUzRIIOhATJOdkSOn4eChekU835RtmPqp33S7JQ==}
     engines: {node: '>=16'}
     dependencies:
       copy-anything: 3.0.5
