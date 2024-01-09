@@ -35,7 +35,7 @@
         "@trpc/next": "^10.33.0",
         "@trpc/react-query": "^10.33.0",
         "@trpc/server": "^10.33.0",
-        "date-fns": "^3.1.0",
+        "date-fns": "^3.2.0",
         "framer-motion": "^10.17.9",
         "next": "13.4.7",
         "next-auth": "^4.24.5",
