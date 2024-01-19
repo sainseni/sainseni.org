@@ -21,8 +21,8 @@ dependencies:
     specifier: ^1.0.7
     version: 1.0.7(@prisma/client@5.8.1)(next-auth@4.24.5)
   '@next/env':
-    specifier: ^14.0.4
-    version: 14.0.4
+    specifier: ^14.1.0
+    version: 14.1.0
   '@prisma/client':
     specifier: ^5.8.1
     version: 5.8.1(prisma@5.8.1)
@@ -2153,8 +2153,8 @@ packages:
     resolution: {integrity: sha512-Yac/bV5sBGkkEXmAX5FWPS9Mmo2rthrOPRQQNfycJPkjUAUclomCPH7QFVCDQ4Mp2k2K1SSM6m0zrxYrOwtFQw==}
     dev: true
 
-  /@next/env@14.0.4:
-    resolution: {integrity: sha512-irQnbMLbUNQpP1wcE5NstJtbuA/69kRfzBrpAD7Gsn8zm/CY6YQYc3HQBz8QPxwISG26tIm5afvvVbu508oBeQ==}
+  /@next/env@14.1.0:
+    resolution: {integrity: sha512-Py8zIo+02ht82brwwhTg36iogzFqGLPXlRGKQw5s+qP/kMNc4MAyDeEwBKDijk6zTIbegEgu8Qy7C1LboslQAw==}
     dev: false
 
   /@next/eslint-plugin-next@14.0.4:
