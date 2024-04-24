@@ -28,7 +28,7 @@ dependencies:
     version: 5.13.0(prisma@5.13.0)
   '@t3-oss/env-nextjs':
     specifier: ^0.10.1
-    version: 0.10.1(typescript@5.4.5)(zod@3.23.3)
+    version: 0.10.1(typescript@5.4.5)(zod@3.23.4)
   '@tanstack/react-query':
     specifier: ^4.36.1
     version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
@@ -78,8 +78,8 @@ dependencies:
     specifier: ^2.2.5
     version: 2.2.5(react@18.2.0)
   zod:
-    specifier: ^3.23.3
-    version: 3.23.3
+    specifier: ^3.23.4
+    version: 3.23.4
 
 devDependencies:
   '@testing-library/jest-dom':
@@ -2346,7 +2346,7 @@ packages:
     dependencies:
       tslib: 2.6.0
 
-  /@t3-oss/env-core@0.10.1(typescript@5.4.5)(zod@3.23.3):
+  /@t3-oss/env-core@0.10.1(typescript@5.4.5)(zod@3.23.4):
     resolution: {integrity: sha512-GcKZiCfWks5CTxhezn9k5zWX3sMDIYf6Kaxy2Gx9YEQftFcz8hDRN56hcbylyAO3t4jQnQ5ifLawINsNgCDpOg==}
     peerDependencies:
       typescript: '>=5.0.0'
@@ -2356,10 +2356,10 @@ packages:
         optional: true
     dependencies:
       typescript: 5.4.5
-      zod: 3.23.3
+      zod: 3.23.4
     dev: false
 
-  /@t3-oss/env-nextjs@0.10.1(typescript@5.4.5)(zod@3.23.3):
+  /@t3-oss/env-nextjs@0.10.1(typescript@5.4.5)(zod@3.23.4):
     resolution: {integrity: sha512-iy2qqJLnFh1RjEWno2ZeyTu0ufomkXruUsOZludzDIroUabVvHsrSjtkHqwHp1/pgPUzN3yBRHMILW162X7x2Q==}
     peerDependencies:
       typescript: '>=5.0.0'
@@ -2368,9 +2368,9 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@t3-oss/env-core': 0.10.1(typescript@5.4.5)(zod@3.23.3)
+      '@t3-oss/env-core': 0.10.1(typescript@5.4.5)(zod@3.23.4)
       typescript: 5.4.5
-      zod: 3.23.3
+      zod: 3.23.4
     dev: false
 
   /@tanstack/query-core@4.36.1:
@@ -8001,6 +8001,6 @@ packages:
   /zod@3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
 
-  /zod@3.23.3:
-    resolution: {integrity: sha512-tPvq1B/2Yu/dh2uAIH2/BhUlUeLIUvAjr6dpL/75I0pCYefHgjhXk1o1Kob3kTU8C7yU1j396jFHlsVWFi9ogg==}
+  /zod@3.23.4:
+    resolution: {integrity: sha512-/AtWOKbBgjzEYYQRNfoGKHObgfAZag6qUJX1VbHo2PRBgS+wfWagEY2mizjfyAPcGesrJOcx/wcl0L9WnVrHFw==}
     dev: false
