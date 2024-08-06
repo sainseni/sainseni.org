@@ -71,7 +71,7 @@
         "lint-staged": "^15.2.8",
         "next-sitemap": "^4.2.3",
         "prettier": "^3.3.3",
-        "prisma": "^5.17.0",
+        "prisma": "^5.18.0",
         "superjson": "^2.2.1",
         "ts-node": "^10.9.2",
         "typescript": "5.5.4"
