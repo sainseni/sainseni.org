@@ -1,0 +1,51 @@
+{
+    "name": "sainseni.org",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "lint": "next lint",
+        "lint:fix": "eslint src --fix && pnpm format",
+        "lint:strict": "eslint --max-warnings=0 src",
+        "typecheck": "tsc --noEmit --incremental false",
+        "format": "prettier -w .",
+        "format:check": "prettier -c .",
+        "prepare": "husky"
+    },
+    "dependencies": {
+        "@next/env": "^14.2.6",
+        "class-variance-authority": "^0.7.0",
+        "clsx": "^2.1.1",
+        "date-fns": "^3.6.0",
+        "framer-motion": "^11.3.29",
+        "lucide-react": "^0.435.0",
+        "next": "14.2.6",
+        "next-seo": "^6.5.0",
+        "next-sitemap": "^4.2.3",
+        "react": "^18",
+        "react-copy-to-clipboard": "^5.1.0",
+        "react-dom": "^18",
+        "tailwind-merge": "^2.5.2",
+        "tailwindcss-animate": "^1.0.7",
+        "zod": "^3.23.8"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "@typescript-eslint/eslint-plugin": "^8.2.0",
+        "@typescript-eslint/parser": "^8.2.0",
+        "eslint": "^8",
+        "eslint-config-next": "14.2.6",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-react": "^7.35.0",
+        "eslint-plugin-simple-import-sort": "^12.1.1",
+        "eslint-plugin-unused-imports": "^4.1.3",
+        "husky": "^9.1.5",
+        "postcss": "^8",
+        "prettier": "^3.3.3",
+        "tailwindcss": "^3.4.1",
+        "typescript": "^5"
+    }
+}
