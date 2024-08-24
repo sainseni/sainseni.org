@@ -8,3 +8,9 @@ lerna.json
 .vscode
 next-seo.config.js
 next-seo.config.ts
+.next/
+node_modules/
+coverage/
+__snapshots__/
+package-lock.json
+pnpm-lock.yaml
