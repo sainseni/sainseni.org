@@ -1,5 +1,6 @@
-![Production](https://img.shields.io/github/actions/workflow/status/saiseni/sainseni.org/actions/workflows/release.yml?label=Production&logo=github&style=flat-square)
-![Staging](https://img.shields.io/github/actions/workflow/status/saiseni/sainseni.org/actions/workflows/staging.yml?label=Staging&logo=github&style=flat-square)
+[![Production](https://github.com/sainseni/sainseni.org/actions/workflows/release.yml/badge.svg)](https://github.com/sainseni/sainseni.org/actions/workflows/release.yml)
+[![Staging](https://github.com/sainseni/sainseni.org/actions/workflows/staging.yml/badge.svg)](https://github.com/sainseni/sainseni.org/actions/workflows/staging.yml)
+[![PR](https://github.com/sainseni/sainseni.org/actions/workflows/pull_request.yml/badge.svg)](https://github.com/sainseni/sainseni.org/actions/workflows/pull_request.yml)
 
 # Sainseni
 
