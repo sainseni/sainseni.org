@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { EventCard, FeatureCard, ProjectCard } from './cards';
 import { CollaborationIcon, GalleryIcon, TalkIcon } from './icons';
 
-export default function Page() {
+export default function HomePage() {
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
