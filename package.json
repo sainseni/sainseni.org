@@ -11,7 +11,8 @@
         "typecheck": "tsc --noEmit --incremental false",
         "format": "prettier -w .",
         "format:check": "prettier -c .",
-        "prepare": "husky"
+        "prepare": "husky",
+        "test": "echo \"Skip: no tests yet\""
     },
     "dependencies": {
         "@next/env": "^14.2.6",
