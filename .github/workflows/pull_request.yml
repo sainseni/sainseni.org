@@ -46,15 +46,13 @@ jobs:
             - name: Deploy Project Artifacts to Vercel
               run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
 
-            - name: Capture Vercel Preview URL
-              id: vercel_preview
-              uses: aaimio/vercel-preview-url-action@v2.2.0
-              with:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Set output URL
+              id: vercel
+              run: echo "url=$(cat deployment-url.txt)" >> $GITHUB_OUTPUT
 
             - name: Comment on Pull Request
               uses: peter-evans/create-or-update-comment@v2
               with:
                   issue-number: ${{ github.event.pull_request.number }}
                   body: |
-                      Preview URL: ${{ steps.vercel_preview.outputs.vercel_preview_url }}
+                      Preview URL: ${{ steps.vercel.outputs.url }}
