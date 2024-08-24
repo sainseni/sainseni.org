@@ -13,10 +13,10 @@ import {
 } from '@/components/ui/card';
 
 export default function SignInPage() {
-    const handleSSOLogin = (provider: string) => {
-        // Handle SSO login logic here
-        // console.log('SSO login with:', provider);
-    };
+    // const handleSSOLogin = (provider: string) => {
+    //     // Handle SSO login logic here
+    //     // console.log('SSO login with:', provider);
+    // };
 
     return (
         <div className='flex-1 flex items-center justify-center bg-background p-4'>
@@ -43,7 +43,7 @@ export default function SignInPage() {
                             <Button
                                 variant='outline'
                                 className='w-full h-12 text-base font-medium'
-                                onClick={() => handleSSOLogin('github')}
+                                // onClick={() => handleSSOLogin('github')}
                             >
                                 <svg
                                     className='mr-2 h-5 w-5'
@@ -64,7 +64,7 @@ export default function SignInPage() {
                             <Button
                                 variant='outline'
                                 className='w-full h-12 text-base font-medium'
-                                onClick={() => handleSSOLogin('google')}
+                                // onClick={() => handleSSOLogin('google')}
                             >
                                 <svg
                                     className='mr-2 h-5 w-5'
