@@ -37,21 +37,3 @@ jobs:
 
             - name: Set vercel alias URL staging
               run: vercel alias set ${{ steps.vercel.outputs.url }} ${{ secrets.VERCEL_STAGING_DOMAIN }} --token=${{ secrets.VERCEL_TOKEN }}
-
-            - name: Create Deployment
-              id: create_deployment
-              uses: octokit/request-action@v2.x
-              with:
-                  route: POST /repos/${{ github.repository }}/deployments
-                  ref: ${{ github.sha }}
-                  payload: '{"ref":"${{ github.ref }}","auto_merge":false,"required_contexts":[]}'
-                  mediaType: '{"accept":"application/vnd.github.ant-man-preview+json,application/vnd.github.flash-preview+json"}'
-                  token: ${{ secrets.GITHUB_TOKEN }}
-
-            - name: Set Deployment Status
-              uses: octokit/request-action@v2.x
-              with:
-                  route: POST /repos/${{ github.repository }}/deployments/${{ steps.create_deployment.outputs.deployment_id }}/statuses
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  mediaType: '{"accept":"application/vnd.github.ant-man-preview+json,application/vnd.github.flash-preview+json"}'
-                  payload: '{"state":"success","environment_url":"${{ steps.vercel.outputs.url }}"}'
