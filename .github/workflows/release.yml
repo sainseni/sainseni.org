@@ -1,4 +1,4 @@
-name: Vercel Release Production
+name: Release
 env:
     DATABASE_URL: ${{ secrets.DATABASE_URL }}
     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
