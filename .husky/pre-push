@@ -6,6 +6,13 @@ git pull --rebase origin main
 echo '🏗️👷 Checking your project before pushing'
 echo 'please be patient, this may take a while...'
 
+# Check ESLint Standards
+pnpm lint:strict ||
+(
+    echo '🔨❌ Yoo, you have a problem in your code. Check your linter 🔨❌ Run `pnpm lint:fix`, add changes and try commit again.';
+    false;
+)
+
 # Test Build
 pnpm build ||
 (
