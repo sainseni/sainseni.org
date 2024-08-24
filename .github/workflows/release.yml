@@ -1,0 +1,49 @@
+name: Vercel Release Production
+env:
+    DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+    VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+    push:
+        tags:
+            - '*'
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 8.15.5
+                  run_install: true
+            - name: Lint
+              run: pnpm lint
+            - name: Build
+              run: pnpm build
+            - name: Test
+              run: pnpm test
+
+    deploy:
+        environment:
+            name: 'Production'
+            url: 'https://sainseni.org'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 7.33.1
+                  run_install: false
+            - name: Install Vercel CLI with pnpm
+              run: pnpm add -g vercel@latest
+
+            - name: Pull Vercel Environment Information
+              run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+            - name: Build Project Artifacts
+              run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+            - name: Deploy Project Artifacts to Vercel
+              run: vercel deploy --prod --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
