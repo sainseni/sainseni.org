@@ -10,7 +10,7 @@ jobs:
     deploy:
         environment:
             name: 'Staging'
-            url: ${{ steps.vercel.outputs.url }}
+            url: ${{ secrets.VERCEL_STAGING_DOMAIN }}
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
@@ -34,6 +34,9 @@ jobs:
             - name: Set output URL
               id: vercel
               run: echo "url=$(cat deployment-url.txt)" >> $GITHUB_OUTPUT
+
+            - name: Set vercel alias URL staging
+              run: vercel alias set ${{ steps.vercel.outputs.url }} ${{ secrets.VERCEL_STAGING_DOMAIN }} --token=${{ secrets.VERCEL_TOKEN }}
 
             - name: Create Deployment
               id: create_deployment
