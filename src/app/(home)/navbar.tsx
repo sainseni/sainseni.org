@@ -2,6 +2,7 @@
 
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -14,27 +15,34 @@ const navbarMenu = [
         name: 'Home',
         url: '/',
     },
-    // Uncomment these to add more menu items
-    // {
-    //     name: 'Tools',
-    //     url: '/tools',
-    // },
-    // {
-    //     name: 'Projects',
-    //     url: '/projects',
-    // },
-    // {
-    //     name: 'About',
-    //     url: '/about',
-    // },
-    // {
-    //     name: 'Blog',
-    //     url: '/blog',
-    // },
+    {
+        name: 'Tools',
+        url: '/tools',
+    },
+    {
+        name: 'Projects',
+        url: '/projects',
+    },
+    {
+        name: 'About',
+        url: '/about',
+    },
+    {
+        name: 'Blog',
+        url: '/blog',
+    },
 ];
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
+
+    const isActive = (path: string) => {
+        if (path === '/') {
+            return pathname === path;
+        }
+        return pathname.startsWith(path);
+    };
 
     return (
         <header className='sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
@@ -65,7 +73,11 @@ export default function Navbar() {
                                 <Link
                                     key={item.url}
                                     href={item.url}
-                                    className='text-muted-foreground transition-colors hover:text-foreground'
+                                    className={`transition-colors hover:text-foreground ${
+                                        isActive(item.url)
+                                            ? 'text-foreground font-semibold'
+                                            : 'text-muted-foreground'
+                                    }`}
                                     onClick={() => setIsOpen(false)}
                                 >
                                     {item.name}
@@ -96,7 +108,11 @@ export default function Navbar() {
                         <Link
                             key={item.url}
                             href={item.url}
-                            className='transition-colors hover:text-foreground/80 text-foreground/60'
+                            className={`transition-colors hover:text-foreground/80 ${
+                                isActive(item.url)
+                                    ? 'text-foreground font-semibold'
+                                    : 'text-foreground/60'
+                            }`}
                         >
                             {item.name}
                         </Link>

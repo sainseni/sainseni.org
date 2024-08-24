@@ -23,7 +23,6 @@
         "framer-motion": "^11.3.30",
         "lucide-react": "^0.435.0",
         "next": "14.2.6",
-        "next-seo": "^6.5.0",
         "next-sitemap": "^4.2.3",
         "react": "^18",
         "react-copy-to-clipboard": "^5.1.0",

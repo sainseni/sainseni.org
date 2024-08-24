@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import './globals.css';
@@ -6,8 +6,14 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'Sainseni',
-    description: 'Coming soon...',
+    title: 'Sainseni Community',
+    authors: [
+        {
+            name: 'Khoironi Kurnia Syah',
+            url: 'https://zekhoi.dev',
+        },
+    ],
+    description: 'Communty for community',
 };
 
 export default function RootLayout({
