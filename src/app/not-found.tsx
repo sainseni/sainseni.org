@@ -2,15 +2,17 @@
 
 import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
+import Head from 'next/head';
 import Link from 'next/link';
-import { NextSeo } from 'next-seo';
 
 import { Button } from '@/components/ui/button';
 
 export default function Custom404() {
     return (
         <>
-            <NextSeo title='404 - Page Not Found' />
+            <Head>
+                <title>404 - Page Not Found</title>
+            </Head>
             <main className='flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4 overflow-hidden'>
                 <motion.div
                     className='text-9xl font-bold mb-8 flex items-center justify-center'

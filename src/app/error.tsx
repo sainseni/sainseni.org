@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import { AlertTriangle } from 'lucide-react';
 import { NextPageContext } from 'next';
+import Head from 'next/head';
 import Link from 'next/link';
-import { NextSeo } from 'next-seo';
 
 import { Button } from '@/components/ui/button';
 
@@ -15,13 +15,13 @@ interface ErrorProps {
 function Error({ statusCode }: ErrorProps) {
     return (
         <>
-            <NextSeo
-                title={
-                    statusCode
+            <Head>
+                <title>
+                    {statusCode
                         ? `${statusCode} - Error Occurred`
-                        : 'An Error Occurred'
-                }
-            />
+                        : 'An Error Occurred'}
+                </title>
+            </Head>
             <main className='flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4 overflow-hidden'>
                 <motion.div
                     initial={{ scale: 0 }}
