@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+
 import { Button } from '@/components/ui/button';
 import {
     Card,
@@ -9,12 +11,11 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
-import Link from 'next/link';
 
 export default function SignInPage() {
     const handleSSOLogin = (provider: string) => {
         // Handle SSO login logic here
-        console.log('SSO login with:', provider);
+        // console.log('SSO login with:', provider);
     };
 
     return (
