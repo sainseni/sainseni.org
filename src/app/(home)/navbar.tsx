@@ -85,19 +85,8 @@ export default function Navbar() {
                             ))}
                         </nav>
                         <div className='flex flex-col space-y-4 mt-8'>
-                            <Link
-                                href='/signin'
-                                onClick={() => setIsOpen(false)}
-                            >
-                                <Button variant='outline' className='w-full'>
-                                    Sign In
-                                </Button>
-                            </Link>
-                            <Link
-                                href='/signup'
-                                onClick={() => setIsOpen(false)}
-                            >
-                                <Button className='w-full'>Sign Up</Button>
+                            <Link href='/auth' onClick={() => setIsOpen(false)}>
+                                <Button className='w-full'>Sign In</Button>
                             </Link>
                         </div>
                     </SheetContent>
@@ -120,13 +109,8 @@ export default function Navbar() {
                 </nav>
 
                 <div className='hidden md:flex items-center space-x-2'>
-                    <Link href='/signin'>
-                        <Button variant='ghost' size='sm'>
-                            Sign In
-                        </Button>
-                    </Link>
-                    <Link href='/signup'>
-                        <Button size='sm'>Sign Up</Button>
+                    <Link href='/auth'>
+                        <Button size='sm'>Sign In</Button>
                     </Link>
                 </div>
             </div>

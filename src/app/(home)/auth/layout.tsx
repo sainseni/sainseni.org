@@ -1,12 +1,7 @@
 import { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-import './globals.css';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'Sainseni Community',
+    title: 'Signin | Sainseni Community',
     authors: [
         {
             name: 'Khoironi Kurnia Syah',
@@ -16,14 +11,10 @@ export const metadata: Metadata = {
     description: 'Community for community',
 };
 
-export default function RootLayout({
+export default function AuthLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    return (
-        <html lang='en'>
-            <body className={inter.className}>{children}</body>
-        </html>
-    );
+    return <>{children}</>;
 }
