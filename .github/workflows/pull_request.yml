@@ -12,10 +12,10 @@ jobs:
         if: ${{ github.actor != 'dependabot[bot]' }}
         steps:
             - name: Checkout Repository
-              uses: actions/checkout@v3
-            - uses: pnpm/action-setup@v2
+              uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
               with:
-                  version: 7.33.1
+                  version: 8.15.5
                   run_install: true
             - name: Lint
               run: pnpm lint
@@ -28,10 +28,10 @@ jobs:
         runs-on: ubuntu-latest
         needs: build
         steps:
-            - uses: actions/checkout@v3
-            - uses: pnpm/action-setup@v2
+            - uses: actions/checkout@v4
+            - uses: pnpm/action-setup@v4
               with:
-                  version: 7.33.1
+                  version: 8.15.5
                   run_install: false
 
             - name: Install Vercel CLI with pnpm
@@ -48,11 +48,20 @@ jobs:
 
             - name: Set output URL
               id: vercel
-              run: echo "url=$(cat deployment-url.txt)" >> $GITHUB_OUTPUT
+              run: |
+                  echo "::set-output name=url::$(vercel --token=${{ secrets.VERCEL_TOKEN }} output --environment=preview --json | jq -r '.[0].url')"
+
+            - name: Set Vercel URL as an output
+              run: echo "URL=${{ steps.vercel.outputs.url }}" >> $GITHUB_ENV
 
             - name: Comment on Pull Request
-              uses: peter-evans/create-or-update-comment@v2
+              uses: actions/github-script@v4
               with:
-                  issue-number: ${{ github.event.pull_request.number }}
-                  body: |
-                      Preview URL: ${{ steps.vercel.outputs.url }}
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+                  script: |
+                      github.issues.createComment({
+                          issue_number: context.issue.number,
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          body: 'Preview deployment is live at ${{ steps.vercel.outputs.url }}'
+                      })
