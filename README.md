@@ -1,39 +1,77 @@
-![Latest](https://github.com/saiseni/sainseni.org/actions/workflows/release.yml/badge.svg)
-![Staging](https://github.com/saiseni/sainseni.org/actions/workflows/release.yml/badge.svg)
+![Production](https://img.shields.io/github/actions/workflow/status/saiseni/sainseni.org/actions/workflows/release.yml?label=Production&logo=github&style=flat-square)
+![Staging](https://img.shields.io/github/actions/workflow/status/saiseni/sainseni.org/actions/workflows/staging.yml?label=Staging&logo=github&style=flat-square)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sainseni
 
-## Getting Started
+Welcome to **Sainseni**, the official community website for developers to connect, share knowledge, and collaborate on open-source projects.
 
-First, run the development server:
+## 🚀 Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Sainseni is a community-driven platform built using [Next.js](https://nextjs.org/). The website features forums, event listings, project showcases, and more, all designed to foster collaboration and learning among developers.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-   **Next.js**: Core framework for server-side rendering and static site generation.
+-   **React**: Frontend library for building user interfaces.
+-   **Tailwind CSS**: Utility-first CSS framework for styling.
+-   **TypeScript**: Strict syntactical superset of JavaScript for type safety.
+-   **Shadcn**: UI components library for React.
+-   **Vercel**: Deployment and hosting platform.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 📚 Getting Started
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+-   Node.js v18+
+-   pnpm v8
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Clone the repo:**
 
-## Deploy on Vercel
+    ```bash
+    git clone https://github.com/sainseni/sainseni.org.git
+    cd sainseni
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install dependencies:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    ```bash
+    pnpm install
+    ```
+
+3. **Run the development server:**
+
+    ```bash
+    pnpm dev
+    ```
+
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🧑‍💻 Contributing
+
+We welcome contributions from everyone! Here’s how you can get involved:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feat/your-feature`).
+3. Make your changes.
+4. Commit your changes (`git commit -m 'Add some feature'`).
+5. Push to the branch (`git push origin feat/your-feature`).
+6. Open a pull request.
+
+Please make sure to read our [Contributing Guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## 📝 License
+
+This project is licensed under the Creative Commons Zero v1.0 Universal License. See the [LICENSE](LICENSE) file for more details.
+
+## 🌟 Acknowledgments
+
+A big thanks to everyone who has contributed to this project. Your support makes this community possible!
+
+## 🗂️ Resources
+
+-   [Next.js Documentation](https://nextjs.org/docs)
+-   [React Documentation](https://reactjs.org/docs/getting-started.html)
+-   [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+-   [Prisma Documentation](https://www.prisma.io/docs)
