@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -11,29 +12,16 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import settings from '@/data/settings';
 
 const navbarMenu = [
-    {
-        name: 'Home',
-        url: '/',
-    },
-    {
-        name: 'Tools',
-        url: '/tools',
-    },
-    {
-        name: 'Projects',
-        url: '/projects',
-    },
-    {
-        name: 'About',
-        url: '/about',
-    },
-    {
-        name: 'Blog',
-        url: '/blog',
-    },
+    { name: 'Home', url: '/' },
+    { name: 'Tools', url: '/tools' },
+    { name: 'Projects', url: '/projects' },
+    { name: 'Friends', url: '/friends' },
+    { name: 'References', url: '/references' },
+    { name: 'About', url: '/about' },
+    { name: 'Blog', url: '/blog' },
 ];
 
-export default function Navbar() {
+export default function Component() {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
 
@@ -48,9 +36,14 @@ export default function Navbar() {
         <header className='sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
             <div className='container flex h-14 items-center justify-between'>
                 <Link href='/' className='flex items-center space-x-2'>
-                    <span className='text-xl font-bold'>
+                    <motion.span
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className='text-xl font-bold'
+                    >
                         {settings.sitename}
-                    </span>
+                    </motion.span>
                 </Link>
 
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -69,50 +62,78 @@ export default function Navbar() {
                         className='w-[300px] sm:w-[400px]'
                     >
                         <nav className='flex flex-col space-y-4 mt-4'>
-                            {navbarMenu.map((item) => (
-                                <Link
-                                    key={item.url}
-                                    href={item.url}
-                                    className={`transition-colors hover:text-foreground ${
-                                        isActive(item.url)
-                                            ? 'text-foreground font-semibold'
-                                            : 'text-muted-foreground'
-                                    }`}
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    {item.name}
-                                </Link>
-                            ))}
+                            <AnimatePresence>
+                                {navbarMenu.map((item, index) => (
+                                    <motion.div
+                                        key={item.url}
+                                        initial={{ opacity: 0, x: -50 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: 50 }}
+                                        transition={{
+                                            duration: 0.3,
+                                            delay: index * 0.1,
+                                        }}
+                                    >
+                                        <Link
+                                            href={item.url}
+                                            className={`transition-colors hover:text-foreground ${
+                                                isActive(item.url)
+                                                    ? 'text-foreground font-semibold'
+                                                    : 'text-muted-foreground'
+                                            }`}
+                                            onClick={() => setIsOpen(false)}
+                                        >
+                                            {item.name}
+                                        </Link>
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
                         </nav>
-                        <div className='flex flex-col space-y-4 mt-8'>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                            className='flex flex-col space-y-4 mt-8'
+                        >
                             <Link href='/auth' onClick={() => setIsOpen(false)}>
                                 <Button className='w-full'>Sign In</Button>
                             </Link>
-                        </div>
+                        </motion.div>
                     </SheetContent>
                 </Sheet>
 
                 <nav className='hidden md:flex items-center space-x-6 text-sm font-medium'>
-                    {navbarMenu.map((item) => (
-                        <Link
+                    {navbarMenu.map((item, index) => (
+                        <motion.div
                             key={item.url}
-                            href={item.url}
-                            className={`transition-colors hover:text-foreground/80 ${
-                                isActive(item.url)
-                                    ? 'text-foreground font-semibold'
-                                    : 'text-foreground/60'
-                            }`}
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
-                            {item.name}
-                        </Link>
+                            <Link
+                                href={item.url}
+                                className={`transition-colors hover:text-foreground/80 ${
+                                    isActive(item.url)
+                                        ? 'text-foreground font-semibold'
+                                        : 'text-foreground/60'
+                                }`}
+                            >
+                                {item.name}
+                            </Link>
+                        </motion.div>
                     ))}
                 </nav>
 
-                <div className='hidden md:flex items-center space-x-2'>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className='hidden md:flex items-center space-x-2'
+                >
                     <Link href='/auth'>
                         <Button size='sm'>Sign In</Button>
                     </Link>
-                </div>
+                </motion.div>
             </div>
         </header>
     );
