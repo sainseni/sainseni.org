@@ -1,5 +1,4 @@
 import { pgTable, timestamp, uuid } from 'drizzle-orm/pg-core';
-import { v7 as uuidv7 } from 'uuid';
 
 import { user } from './user.schema';
 
