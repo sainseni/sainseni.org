@@ -1,0 +1,90 @@
+name: Database
+env:
+    DATABASE_URL: ${{ secrets.DATABASE_URL }}
+on:
+    push:
+        paths:
+            - 'drizzle/**'
+            - 'src/database/**'
+    pull_request:
+        paths:
+            - 'drizzle/**'
+            - 'src/database/**'
+jobs:
+    migrate_test:
+        if: github.event_name == 'pull_request'
+        runs-on: ubuntu-latest
+        services:
+            postgres:
+                image: postgres:16
+                env:
+                    POSTGRES_USER: postgres
+                    POSTGRES_PASSWORD: postgres
+                    POSTGRES_DB: sainseni_test
+                ports:
+                    - 5432:5432
+                options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 8.15.5
+                  run_install: true
+            - name: Setup .env
+              env:
+                  DATABASE_URL: 'postgres://postgres:postgres@localhost:5432/sainseni_test'
+              run: echo "DATABASE_URL=$DATABASE_URL" > $GITHUB_ENV
+
+            - name: Generate Database
+              run: |
+                  pnpm db:generate
+                  echo "Database Generated"
+
+            - name: Migrate Database
+              run: |
+                  pnpm db:migrate
+                  echo "Database Migrated"
+
+            - name: Seed Database
+              run: |
+                  pnpm db:seed
+                  echo "Database Seeded"
+
+    migrate:
+        if: github.event_name == 'push'
+        runs-on: ubuntu-latest
+        # services:
+        #     postgres:
+        #         image: postgres:16
+        #         env:
+        #             POSTGRES_USER: postgres
+        #             POSTGRES_PASSWORD: postgres
+        #             POSTGRES_DB: sainseni
+        #         ports:
+        #             - 5432:5432
+        #         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        steps:
+            - name: Skip
+              run: echo "Skipped"
+            # - name: Checkout Repository
+            #   uses: actions/checkout@v4
+
+            # - uses: pnpm/action-setup@v4
+            #   with:
+            #       version: 8.15.5
+            #       run_install: true
+            # - name: Setup .env
+            #   env:
+            #       DATABASE_URL: 'postgres://postgres:postgres@localhost:5432/sainseni'
+            #   run: echo "DATABASE_URL=$DATABASE_URL" > .env
+
+            # - name: Generate Database
+            #   run: pnpm db:generate
+
+            # - name: Migrate Database
+            #   run: pnpm db:migrate
+
+            # - name: Seed Database
+            #   run: pnpm db:seed
