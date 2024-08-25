@@ -1,7 +1,12 @@
 name: Staging
 env:
+    DATABASE_URL: ${{ secrets.DATABASE_URL_STAGING }}
     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    GITHUB_CLIENT_ID: ${{ secrets.OAUTH_GITHUB_CLIENT_ID_STAGING }}
+    GITHUB_CLIENT_SECRET: ${{ secrets.OAUTH_GITHUB_CLIENT_SECRET_STAGING }}
+    GOOGLE_CLIENT_ID: ${{ secrets.OAUTH_GOOGLE_CLIENT_ID_STAGING }}
+    GOOGLE_CLIENT_SECRET: ${{ secrets.OAUTH_GOOGLE_CLIENT_SECRET_STAGING }}
 on:
     push:
         branches:
@@ -21,6 +26,14 @@ jobs:
 
             - name: Install Vercel CLI with pnpm
               run: pnpm add -g vercel@latest
+
+            - name: Set env Vercel
+              run: |
+                  vercel env add DATABASE_URL ${{ secrets.DATABASE_URL_STAGING }} preview --token=${{ secrets.VERCEL_TOKEN }} 
+                  vercel env add GITHUB_CLIENT_ID ${{ secrets.OAUTH_GITHUB_CLIENT_ID_STAGING }} preview --token=${{ secrets.VERCEL_TOKEN }}
+                  vercel env add GITHUB_CLIENT_SECRET ${{ secrets.OAUTH_GITHUB_CLIENT_SECRET_STAGING }} preview --token=${{ secrets.VERCEL_TOKEN }}
+                  vercel env add GOOGLE_CLIENT_ID ${{ secrets.OAUTH_GOOGLE_CLIENT_ID_STAGING }} preview --token=${{ secrets.VERCEL_TOKEN }}
+                  vercel env add GOOGLE_CLIENT_SECRET ${{ secrets.OAUTH_GOOGLE_CLIENT_SECRET_STAGING }} preview --token=${{ secrets.VERCEL_TOKEN }}
 
             - name: Pull Vercel Environment Information
               run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
