@@ -15,6 +15,7 @@ export interface GitHubUser {
     login: string;
     avatar_url: string;
     email: string;
+    name: string;
 }
 
 interface Email {
@@ -28,26 +29,51 @@ export async function GET(request: Request): Promise<Response> {
     const url = new URL(request.url);
     const code = url.searchParams.get('code');
     const state = url.searchParams.get('state');
-    const storedState = cookies().get('github_oauth_state')?.value ?? null;
-    if (!code || !state || !storedState || state !== storedState) {
-        return new Response(null, {
-            status: 400,
-        });
+
+    if (!code || !state) {
+        return Response.json(
+            { error: 'Invalid request' },
+            {
+                status: 400,
+            },
+        );
+    }
+
+    const savedState = cookies().get('github_oauth_state')?.value;
+
+    if (!savedState) {
+        return Response.json(
+            { error: 'saved state is not exists' },
+            {
+                status: 400,
+            },
+        );
+    }
+
+    if (savedState !== state) {
+        return Response.json(
+            {
+                error: 'State does not match',
+            },
+            {
+                status: 400,
+            },
+        );
     }
 
     try {
-        const tokens = await github.validateAuthorizationCode(code);
+        const { accessToken } = await github.validateAuthorizationCode(code);
         const githubUserResponse = await fetch('https://api.github.com/user', {
             headers: {
-                Authorization: `Bearer ${tokens.accessToken}`,
+                Authorization: `Bearer ${accessToken}`,
             },
+            method: 'GET',
         });
         const githubUser: GitHubUser = await githubUserResponse.json();
 
         const existingAccount = await getUserByGithubId(githubUser.id);
-
         if (existingAccount) {
-            await setSession(existingAccount.accountId);
+            await setSession(existingAccount.id);
             return new Response(null, {
                 status: 302,
                 headers: {
@@ -61,7 +87,7 @@ export async function GET(request: Request): Promise<Response> {
                 'https://api.github.com/user/emails',
                 {
                     headers: {
-                        Authorization: `Bearer ${tokens.accessToken}`,
+                        Authorization: `Bearer ${accessToken}`,
                     },
                 },
             );
@@ -73,7 +99,10 @@ export async function GET(request: Request): Promise<Response> {
         const userId = await createUserViaGithub({
             accountId: githubUser.id,
             email: githubUser.email,
+            name: githubUser.name,
+            avatar: githubUser.avatar_url,
         });
+
         await setSession(userId);
         return new Response(null, {
             status: 302,

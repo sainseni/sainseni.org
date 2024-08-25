@@ -5,6 +5,8 @@ import { database, role, user } from '@/database';
 export type CreateUserProps = {
     accountId: string;
     email: string;
+    name: string;
+    avatar?: string;
 };
 export async function createUser(
     data: CreateUserProps,
@@ -25,6 +27,8 @@ export async function createUser(
             accountId: data.accountId,
             email: data.email,
             role: userRole.id,
+            name: data.name,
+            avatar: data.avatar,
         })
         .onConflictDoNothing()
         .returning();

@@ -1,9 +1,9 @@
-import { pgTable, timestamp, uuid } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 import { user } from './user.schema';
 
 export const session = pgTable('session', {
-    id: uuid('id').primaryKey(),
+    id: text('id').primaryKey(),
     userId: uuid('user_id')
         .notNull()
         .references(() => user.id),

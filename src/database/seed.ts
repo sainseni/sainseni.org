@@ -29,12 +29,14 @@ async function main() {
             {
                 accountId: 'google:1234567890',
                 email: 'jokowi@indonesia.go.id',
+                name: 'Joko Widodo',
                 accountType: 'google',
                 role: adminRole.id,
             },
             {
                 accountId: 'github:1234567890',
                 email: 'prabowo@indonesia.go.id',
+                name: 'Prabowo Subianto',
                 accountType: 'github',
                 role: userRole.id,
             },

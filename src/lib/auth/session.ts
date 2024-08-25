@@ -23,9 +23,7 @@ export const assertAuthenticated = async () => {
 };
 
 export async function setSession(userId: UserId) {
-    const session = await lucia.createSession(userId, {
-        role: 'user',
-    });
+    const session = await lucia.createSession(userId, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
     cookies().set(
         sessionCookie.name,

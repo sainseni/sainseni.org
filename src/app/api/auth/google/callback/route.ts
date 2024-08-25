@@ -56,6 +56,7 @@ export async function GET(request: Request): Promise<Response> {
         const userId = await createUserViaGoogle({
             accountId: googleUser.sub,
             email: googleUser.email,
+            name: googleUser.name,
         });
         await setSession(userId);
         return new Response(null, {

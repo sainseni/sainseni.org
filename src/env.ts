@@ -7,7 +7,7 @@ const envSchema = zod.object({
     NEXT_PUBLIC_URL: zod.string().default('http://localhost:3000'),
     PORT: zod.string().default('3000'),
     // Database
-    DATABASE_URL: zod.string(),
+    DATABASE_URL: zod.string().default(''),
     // SSO settings
     GITHUB_CLIENT_ID: zod.string().default(''),
     GITHUB_CLIENT_SECRET: zod.string().default(''),

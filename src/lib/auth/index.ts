@@ -74,6 +74,9 @@ export const validateRequest = cache(
 export const github = new GitHub(
     env.GITHUB_CLIENT_ID,
     env.GITHUB_CLIENT_SECRET,
+    {
+        redirectURI: `${env.NEXT_PUBLIC_URL}/api/auth/github/callback`,
+    },
 );
 
 export const google = new Google(

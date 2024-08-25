@@ -7,6 +7,8 @@ export const accountTypeEnum = pgEnum('type', ['google', 'github']);
 
 export const user = pgTable('users', {
     id: uuid('id').primaryKey().$defaultFn(uuidv7),
+    name: text('name').notNull(),
+    avatar: text('avatar'),
     accountType: accountTypeEnum('account_type').notNull(),
     accountId: text('account_id').unique().notNull(),
     email: text('email').unique().notNull(),
@@ -14,7 +16,6 @@ export const user = pgTable('users', {
         .notNull()
         .references(() => role.id),
     createdAt: timestamp('created_at').defaultNow().notNull(),
-    lastLogin: timestamp('last_login').defaultNow().notNull(),
 });
 
 export type User = typeof user.$inferSelect;
