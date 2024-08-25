@@ -5,6 +5,7 @@ const settings = {
     keywords: 'sainseni, students, learning, building, growing',
     url: 'https://sainseni.org',
     username: 'sainseni',
+    redirectLogin: '/dashboard',
 };
 
 export default settings;

@@ -8,6 +8,9 @@ import { adapter } from '@/database';
 import type { User as DatabaseUser } from '@/database/schema';
 import env from '@/env';
 
+export * from './account';
+export * from './session';
+
 export const lucia = new Lucia(adapter, {
     sessionCookie: {
         attributes: {

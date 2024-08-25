@@ -6,6 +6,7 @@ import postgres from 'postgres';
 import env from '@/env';
 
 import * as schema from './schema';
+export * from './schema';
 
 let database: PostgresJsDatabase<typeof schema>;
 let pg: ReturnType<typeof postgres>;
