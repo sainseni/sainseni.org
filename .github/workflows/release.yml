@@ -1,5 +1,6 @@
 name: Release
 env:
+    NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
     DATABASE_URL: ${{ secrets.DATABASE_URL }}
     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -45,6 +46,7 @@ jobs:
 
             - name: Set env Vercel
               run: |
+                  echo "${{ secrets.NEXT_PUBLIC_URL }}" | vercel env add NEXT_PUBLIC_URL production --token=${{ secrets.VERCEL_TOKEN }} || true
                   echo "${{ secrets.DATABASE_URL }}" | vercel env add DATABASE_URL production --token=${{ secrets.VERCEL_TOKEN }} || true
                   echo "${{ secrets.OAUTH_GITHUB_CLIENT_ID }}" | vercel env add GITHUB_CLIENT_ID production --token=${{ secrets.VERCEL_TOKEN }} || true
                   echo "${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}" | vercel env add GITHUB_CLIENT_SECRET production --token=${{ secrets.VERCEL_TOKEN }} || true
