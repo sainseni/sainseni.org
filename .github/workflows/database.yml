@@ -75,14 +75,20 @@ jobs:
 
             # NOTE: Delete this step if later
             - name: Generate Database
-              run: pnpm db:generate
+              run: |
+                  pnpm db:generate
+                  echo "Database Generated"
 
             - name: Migrate Database
-              run: pnpm db:migrate
+              run: |
+                  pnpm db:migrate
+                  echo "Database Migrated"
 
             # NOTE: Delete this step if later
             - name: Seed Database
-              run: pnpm db:seed
+              run: |
+                  pnpm db:seed
+                  echo "Database Seeded"
 
     migrate_production:
         if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
@@ -99,4 +105,6 @@ jobs:
                   run_install: true
 
             - name: Migrate Database
-              run: pnpm db:migrate
+              run: |
+                  pnpm db:migrate
+                  echo "Database Migrated"
