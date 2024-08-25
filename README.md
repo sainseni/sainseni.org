@@ -76,4 +76,5 @@ A big thanks to everyone who has contributed to this project. Your support makes
 -   [Next.js Documentation](https://nextjs.org/docs)
 -   [React Documentation](https://reactjs.org/docs/getting-started.html)
 -   [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+-   [Shadcn/UI Documentation](https://ui.shadcn.com/docs)
 -   [Drizzle ORM Documentation](https://orm.drizzle.team/docs/overview)
