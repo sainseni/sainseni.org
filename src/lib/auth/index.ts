@@ -20,6 +20,7 @@ export const lucia = new Lucia(adapter, {
     getUserAttributes: (attribute) => {
         return {
             id: attribute.id,
+            role: attribute.role,
         };
     },
 });
