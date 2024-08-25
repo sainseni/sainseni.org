@@ -35,7 +35,7 @@ jobs:
             - name: Setup .env
               env:
                   DATABASE_URL: 'postgres://postgres:postgres@localhost:5432/sainseni_test'
-              run: echo "DATABASE_URL=$DATABASE_URL" > .env
+              run: echo "DATABASE_URL=$DATABASE_URL" > $GITHUB_ENV
 
             - name: Generate Database
               run: pnpm db:generate
