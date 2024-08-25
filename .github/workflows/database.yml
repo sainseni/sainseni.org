@@ -4,10 +4,12 @@ env:
 on:
     push:
         paths:
+            - '.github/workflows/database.yml'
             - 'drizzle/**'
             - 'src/database/**'
     pull_request:
         paths:
+            - '.github/workflows/database.yml'
             - 'drizzle/**'
             - 'src/database/**'
 jobs:
