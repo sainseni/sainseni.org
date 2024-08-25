@@ -44,11 +44,11 @@ jobs:
 
             - name: Set env Vercel
               run: |
-                  echo "${{ secrets.DATABASE_URL_STAGING }}" | vercel env add DATABASE_URL preview --token=${{ secrets.VERCEL_TOKEN }} || true 
-                  echo "${{ secrets.OAUTH_GITHUB_CLIENT_ID_STAGING }}" | vercel env add GITHUB_CLIENT_ID preview --token=${{ secrets.VERCEL_TOKEN }} || true
-                  echo "${{ secrets.OAUTH_GITHUB_CLIENT_SECRET_STAGING }}" | vercel env add GITHUB_CLIENT_SECRET preview --token=${{ secrets.VERCEL_TOKEN }} || true
-                  echo "${{ secrets.OAUTH_GOOGLE_CLIENT_ID_STAGING }}" | vercel env add GOOGLE_CLIENT_ID preview --token=${{ secrets.VERCEL_TOKEN }} || true
-                  echo "${{ secrets.OAUTH_GOOGLE_CLIENT_SECRET_STAGING }}" | vercel env add GOOGLE_CLIENT_SECRET preview --token=${{ secrets.VERCEL_TOKEN }} || true
+                  echo -n "${{ secrets.DATABASE_URL_STAGING }}" | vercel env add DATABASE_URL preview --token=${{ secrets.VERCEL_TOKEN }} || true 
+                  echo -n "${{ secrets.OAUTH_GITHUB_CLIENT_ID_STAGING }}" | vercel env add GITHUB_CLIENT_ID preview --token=${{ secrets.VERCEL_TOKEN }} || true
+                  echo -n "${{ secrets.OAUTH_GITHUB_CLIENT_SECRET_STAGING }}" | vercel env add GITHUB_CLIENT_SECRET preview --token=${{ secrets.VERCEL_TOKEN }} || true
+                  echo -n "${{ secrets.OAUTH_GOOGLE_CLIENT_ID_STAGING }}" | vercel env add GOOGLE_CLIENT_ID preview --token=${{ secrets.VERCEL_TOKEN }} || true
+                  echo -n "${{ secrets.OAUTH_GOOGLE_CLIENT_SECRET_STAGING }}" | vercel env add GOOGLE_CLIENT_SECRET preview --token=${{ secrets.VERCEL_TOKEN }} || true
 
             - name: Pull Vercel Environment Information
               run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
