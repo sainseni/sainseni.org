@@ -1,15 +1,17 @@
-import { ReactNode } from 'react';
+import { validateRequest } from '@/lib/auth';
 
-import Footer from './footer';
-import Navbar from './navbar';
+import Footer from '@/components/common/footer';
+import Navbar from '@/components/common/navbar';
 
 type HomeLayoutProps = {
-    children: ReactNode;
+    children: React.ReactNode;
 };
-export default function HomeLayout({ children }: HomeLayoutProps) {
+export default async function HomeLayout({ children }: HomeLayoutProps) {
+    const user = await validateRequest();
+
     return (
         <div className='flex flex-col min-h-screen bg-white text-gray-800'>
-            <Navbar />
+            <Navbar isSigned={!!user.session} />
             {children}
             <Footer />
         </div>
