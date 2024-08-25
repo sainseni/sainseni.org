@@ -4,7 +4,7 @@ import { v7 as uuidv7 } from 'uuid';
 import { user } from './user.schema';
 
 export const session = pgTable('session', {
-    id: uuid('id').primaryKey().$defaultFn(uuidv7),
+    id: uuid('id').primaryKey(),
     userId: uuid('user_id')
         .notNull()
         .references(() => user.id),

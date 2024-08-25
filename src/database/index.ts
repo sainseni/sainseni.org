@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { DrizzlePostgreSQLAdapter } from '@lucia-auth/adapter-drizzle';
 import { drizzle, PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
 
@@ -19,10 +20,11 @@ if (env.NODE_ENV === 'production') {
     }
     database = (global as any).database;
 }
-// export const adapter = new DrizzlePostgreSQLAdapter(
-//     db,
-//     sessionTable,
-//     usersTable,
-// );
 
-export { database, pg };
+const adapter = new DrizzlePostgreSQLAdapter(
+    database,
+    schema.session,
+    schema.user,
+);
+
+export { adapter, database, pg };
