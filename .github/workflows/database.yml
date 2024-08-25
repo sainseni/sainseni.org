@@ -6,6 +6,10 @@ on:
         paths:
             - 'drizzle/**'
             - 'src/database/**'
+    pull_request:
+        paths:
+            - 'drizzle/**'
+            - 'src/database/**'
 jobs:
     migrate:
         runs-on: ubuntu-latest
