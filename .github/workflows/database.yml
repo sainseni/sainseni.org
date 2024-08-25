@@ -11,7 +11,9 @@ on:
             - 'drizzle/**'
             - 'src/database/**'
 jobs:
-    migrate:
+    migrate_test:
+        name: Migrate Database Test
+        if: github.event_name == 'pull_request'
         runs-on: ubuntu-latest
         services:
             postgres:
@@ -44,3 +46,41 @@ jobs:
 
             - name: Seed Database
               run: pnpm db:seed
+
+    migrate:
+        name: Migrate Database
+        if: github.event_name == 'push'
+        runs-on: ubuntu-latest
+        # services:
+        #     postgres:
+        #         image: postgres:16
+        #         env:
+        #             POSTGRES_USER: postgres
+        #             POSTGRES_PASSWORD: postgres
+        #             POSTGRES_DB: sainseni
+        #         ports:
+        #             - 5432:5432
+        #         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        steps:
+            - name: Skip
+              run: echo "Skip"
+            # - name: Checkout Repository
+            #   uses: actions/checkout@v4
+
+            # - uses: pnpm/action-setup@v4
+            #   with:
+            #       version: 8.15.5
+            #       run_install: true
+            # - name: Setup .env
+            #   env:
+            #       DATABASE_URL: 'postgres://postgres:postgres@localhost:5432/sainseni'
+            #   run: echo "DATABASE_URL=$DATABASE_URL" > .env
+
+            # - name: Generate Database
+            #   run: pnpm db:generate
+
+            # - name: Migrate Database
+            #   run: pnpm db:migrate
+
+            # - name: Seed Database
+            #   run: pnpm db:seed

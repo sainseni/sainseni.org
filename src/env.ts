@@ -5,8 +5,8 @@ const envSchema = zod.object({
     NODE_ENV: zod.string().default('development'),
     PORT: zod.string().default('3000'),
     DATABASE_URL: zod.string(),
-    GITHUB_CLIENT_ID: zod.string(),
-    GITHUB_CLIENT_SECRET: zod.string(),
+    GITHUB_CLIENT_ID: zod.string().default(''),
+    GITHUB_CLIENT_SECRET: zod.string().default(''),
 });
 
 const env = envSchema.parse(process.env);
