@@ -12,7 +12,6 @@ on:
             - 'src/database/**'
 jobs:
     migrate_test:
-        name: Migrate Database Test
         if: github.event_name == 'pull_request'
         runs-on: ubuntu-latest
         services:
@@ -48,7 +47,6 @@ jobs:
               run: pnpm db:seed
 
     migrate:
-        name: Migrate Database
         if: github.event_name == 'push'
         runs-on: ubuntu-latest
         # services:
