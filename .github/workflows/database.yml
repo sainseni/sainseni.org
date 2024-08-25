@@ -73,12 +73,14 @@ jobs:
                   DATABASE_URL: ${{ secrets.DATABASE_URL_STAGING }}
               run: echo "DATABASE_URL=$DATABASE_URL" > $GITHUB_ENV
 
+            # NOTE: Delete this step if later
             - name: Generate Database
               run: pnpm db:generate
 
             - name: Migrate Database
               run: pnpm db:migrate
 
+            # NOTE: Delete this step if later
             - name: Seed Database
               run: pnpm db:seed
 
@@ -96,11 +98,5 @@ jobs:
                   version: 8.15.5
                   run_install: true
 
-            - name: Generate Database
-              run: pnpm db:generate
-
             - name: Migrate Database
               run: pnpm db:migrate
-
-            - name: Seed Database
-              run: pnpm db:seed
