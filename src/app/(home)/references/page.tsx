@@ -194,7 +194,7 @@ export default function ReferenesPage() {
                 title: 'Success',
                 description: 'Metadata fetched successfully',
             });
-        } catch (error) {
+        } catch {
             toast({
                 title: 'Error',
                 description: 'Failed to fetch metadata',
