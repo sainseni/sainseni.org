@@ -1,4 +1,3 @@
-import uuid from 'uuid';
 import 'dotenv/config';
 
 import * as table from '@/database/schema';
@@ -28,13 +27,13 @@ async function main() {
         .insert(table.user)
         .values([
             {
-                accountId: uuid.v4(),
+                accountId: 'google:1234567890',
                 email: 'jokowi@indonesia.go.id',
                 accountType: 'google',
                 role: adminRole.id,
             },
             {
-                accountId: uuid.v4(),
+                accountId: 'github:1234567890',
                 email: 'prabowo@indonesia.go.id',
                 accountType: 'github',
                 role: userRole.id,
