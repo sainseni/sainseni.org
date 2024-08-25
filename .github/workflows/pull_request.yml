@@ -1,5 +1,6 @@
 name: PR
 env:
+    NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL }}
     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     GITHUB_CLIENT_ID: ${{ secrets.OAUTH_GITHUB_CLIENT_ID_STAGING }}

@@ -1,5 +1,6 @@
 name: Staging
 env:
+    NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_URL_STAGING }}
     DATABASE_URL: ${{ secrets.DATABASE_URL_STAGING }}
     VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
     VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -29,6 +30,7 @@ jobs:
 
             - name: Set env Vercel
               run: |
+                  echo "${{ secrets.NEXT_PUBLIC_URL_STAGING }}" | vercel env add NEXT_PUBLIC_URL preview --token=${{ secrets.VERCEL_TOKEN }} || true
                   echo "${{ secrets.DATABASE_URL_STAGING }}" | vercel env add DATABASE_URL preview --token=${{ secrets.VERCEL_TOKEN }} || true 
                   echo "${{ secrets.OAUTH_GITHUB_CLIENT_ID_STAGING }}" | vercel env add GITHUB_CLIENT_ID preview --token=${{ secrets.VERCEL_TOKEN }} || true
                   echo "${{ secrets.OAUTH_GITHUB_CLIENT_SECRET_STAGING }}" | vercel env add GITHUB_CLIENT_SECRET preview --token=${{ secrets.VERCEL_TOKEN }} || true
