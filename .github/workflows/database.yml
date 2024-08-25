@@ -1,6 +1,6 @@
 name: Database
 env:
-    DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    DATABASE_URL: ${{ secrets.DATABASE_URL_STAGING }}
 on:
     push:
         paths:
@@ -52,39 +52,55 @@ jobs:
                   pnpm db:seed
                   echo "Database Seeded"
 
-    migrate:
+    migrate_staging:
         if: github.event_name == 'push'
+        unless: startsWith(github.ref, 'refs/tags/')
+        branches:
+            - main
         runs-on: ubuntu-latest
-        # services:
-        #     postgres:
-        #         image: postgres:16
-        #         env:
-        #             POSTGRES_USER: postgres
-        #             POSTGRES_PASSWORD: postgres
-        #             POSTGRES_DB: sainseni
-        #         ports:
-        #             - 5432:5432
-        #         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         steps:
             - name: Skip
               run: echo "Skipped"
-            # - name: Checkout Repository
-            #   uses: actions/checkout@v4
+            - name: Checkout Repository
+              uses: actions/checkout@v4
 
-            # - uses: pnpm/action-setup@v4
-            #   with:
-            #       version: 8.15.5
-            #       run_install: true
-            # - name: Setup .env
-            #   env:
-            #       DATABASE_URL: 'postgres://postgres:postgres@localhost:5432/sainseni'
-            #   run: echo "DATABASE_URL=$DATABASE_URL" > .env
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 8.15.5
+                  run_install: true
+            - name: Setup .env
+              env:
+                  DATABASE_URL: ${{ secrets.DATABASE_URL_STAGING }}
+              run: echo "DATABASE_URL=$DATABASE_URL" > $GITHUB_ENV
 
-            # - name: Generate Database
-            #   run: pnpm db:generate
+            - name: Generate Database
+              run: pnpm db:generate
 
-            # - name: Migrate Database
-            #   run: pnpm db:migrate
+            - name: Migrate Database
+              run: pnpm db:migrate
 
-            # - name: Seed Database
-            #   run: pnpm db:seed
+            - name: Seed Database
+              run: pnpm db:seed
+
+    migrate_production:
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+        runs-on: ubuntu-latest
+        steps:
+            - name: Skip
+              run: echo "Skipped"
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 8.15.5
+                  run_install: true
+
+            - name: Generate Database
+              run: pnpm db:generate
+
+            - name: Migrate Database
+              run: pnpm db:migrate
+
+            - name: Seed Database
+              run: pnpm db:seed

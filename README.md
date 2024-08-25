@@ -18,6 +18,7 @@ Sainseni is a community-driven platform built using [Next.js](https://nextjs.org
 -   **TypeScript**: Strict syntactical superset of JavaScript for type safety.
 -   **Shadcn**: UI components library for React.
 -   **Vercel**: Deployment and hosting platform.
+-   **Drizzle ORM**: Object-relational mapping library for interacting with the database.
 
 ## 📚 Getting Started
 
@@ -75,4 +76,4 @@ A big thanks to everyone who has contributed to this project. Your support makes
 -   [Next.js Documentation](https://nextjs.org/docs)
 -   [React Documentation](https://reactjs.org/docs/getting-started.html)
 -   [Tailwind CSS Documentation](https://tailwindcss.com/docs)
--   [Prisma Documentation](https://www.prisma.io/docs)
+-   [Drizzle ORM Documentation](https://orm.drizzle.team/docs/overview)
