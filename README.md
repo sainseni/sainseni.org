@@ -1,6 +1,6 @@
 [![Production](https://github.com/sainseni/sainseni.org/actions/workflows/release.yml/badge.svg)](https://github.com/sainseni/sainseni.org/actions/workflows/release.yml)
 [![Staging](https://github.com/sainseni/sainseni.org/actions/workflows/staging.yml/badge.svg)](https://github.com/sainseni/sainseni.org/actions/workflows/staging.yml)
-[![PR](https://github.com/sainseni/sainseni.org/actions/workflows/pull_request.yml/badge.svg)](https://github.com/sainseni/sainseni.org/actions/workflows/pull_request.yml)
+[![Database](https://github.com/sainseni/sainseni.org/actions/workflows/database.yml/badge.svg)](https://github.com/sainseni/sainseni.org/actions/workflows/database.yml)
 
 # Sainseni
 
