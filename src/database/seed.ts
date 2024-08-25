@@ -1,3 +1,4 @@
+import uuid from 'uuid';
 import 'dotenv/config';
 
 import * as table from '@/database/schema';
@@ -10,7 +11,7 @@ async function main() {
         throw new Error('Seed is only allowed in development environment');
     }
 
-    const [admin, user] = await database
+    const [adminRole, userRole] = await database
         .insert(table.role)
         .values([
             {
@@ -27,16 +28,16 @@ async function main() {
         .insert(table.user)
         .values([
             {
-                username: 'jokowi',
+                accountId: uuid.v4(),
                 email: 'jokowi@indonesia.go.id',
                 accountType: 'google',
-                role: admin.id,
+                role: adminRole.id,
             },
             {
-                username: 'prabowo',
+                accountId: uuid.v4(),
                 email: 'prabowo@indonesia.go.id',
                 accountType: 'github',
-                role: user.id,
+                role: userRole.id,
             },
         ])
         .onConflictDoNothing()
