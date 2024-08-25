@@ -56,8 +56,6 @@ jobs:
 
     migrate_staging:
         if: github.event_name == 'push' && !contains(github.ref, 'refs/tags/')
-        branches:
-            - main
         runs-on: ubuntu-latest
         steps:
             - name: Skip
