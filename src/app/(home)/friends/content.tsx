@@ -94,7 +94,7 @@ const friends = [
         },
     },
     {
-        name: 'Bryan Lumbantobing',
+        name: 'Rizky Putra Pratama',
         username: '@rzkiypratama',
         image: '/placeholder.svg?height=100&width=100',
         tags: ['Frontend Engineer'],

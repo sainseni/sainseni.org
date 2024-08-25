@@ -21,7 +21,10 @@ const navbarMenu = [
     { name: 'Blog', url: '/blog' },
 ];
 
-export default function Component() {
+type NavbarProps = {
+    isSigned: boolean;
+};
+export default function Navbar({ isSigned = false }: NavbarProps) {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
 
@@ -95,9 +98,27 @@ export default function Component() {
                             transition={{ duration: 0.5, delay: 0.3 }}
                             className='flex flex-col space-y-4 mt-8'
                         >
-                            <Link href='/auth' onClick={() => setIsOpen(false)}>
-                                <Button className='w-full'>Sign In</Button>
-                            </Link>
+                            {isSigned ? (
+                                <>
+                                    <Button
+                                        className='w-full'
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        Sign Out
+                                    </Button>
+                                </>
+                            ) : (
+                                <>
+                                    <Link
+                                        href='/auth'
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        <Button className='w-full'>
+                                            Sign In
+                                        </Button>
+                                    </Link>
+                                </>
+                            )}
                         </motion.div>
                     </SheetContent>
                 </Sheet>
@@ -130,9 +151,17 @@ export default function Component() {
                     transition={{ duration: 0.5 }}
                     className='hidden md:flex items-center space-x-2'
                 >
-                    <Link href='/auth'>
-                        <Button size='sm'>Sign In</Button>
-                    </Link>
+                    {isSigned ? (
+                        <>
+                            <Button size='sm'>Sign Out</Button>
+                        </>
+                    ) : (
+                        <>
+                            <Link href='/auth'>
+                                <Button size='sm'>Sign In</Button>
+                            </Link>
+                        </>
+                    )}
                 </motion.div>
             </div>
         </header>

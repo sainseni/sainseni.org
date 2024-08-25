@@ -1,10 +1,9 @@
-import { pgTable, timestamp, uuid } from 'drizzle-orm/pg-core';
-import { v7 as uuidv7 } from 'uuid';
+import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 import { user } from './user.schema';
 
 export const session = pgTable('session', {
-    id: uuid('id').primaryKey().$defaultFn(uuidv7),
+    id: text('id').primaryKey(),
     userId: uuid('user_id')
         .notNull()
         .references(() => user.id),

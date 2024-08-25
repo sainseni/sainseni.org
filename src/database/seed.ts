@@ -10,7 +10,7 @@ async function main() {
         throw new Error('Seed is only allowed in development environment');
     }
 
-    const [admin, user] = await database
+    const [adminRole, userRole] = await database
         .insert(table.role)
         .values([
             {
@@ -27,16 +27,18 @@ async function main() {
         .insert(table.user)
         .values([
             {
-                username: 'jokowi',
+                accountId: 'google:1234567890',
                 email: 'jokowi@indonesia.go.id',
+                name: 'Joko Widodo',
                 accountType: 'google',
-                role: admin.id,
+                role: adminRole.id,
             },
             {
-                username: 'prabowo',
+                accountId: 'github:1234567890',
                 email: 'prabowo@indonesia.go.id',
+                name: 'Prabowo Subianto',
                 accountType: 'github',
-                role: user.id,
+                role: userRole.id,
             },
         ])
         .onConflictDoNothing()
