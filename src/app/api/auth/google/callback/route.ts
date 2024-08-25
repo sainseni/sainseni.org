@@ -57,6 +57,7 @@ export async function GET(request: Request): Promise<Response> {
             accountId: googleUser.sub,
             email: googleUser.email,
             name: googleUser.name,
+            avatar: googleUser.picture,
         });
         await setSession(userId);
         return new Response(null, {
