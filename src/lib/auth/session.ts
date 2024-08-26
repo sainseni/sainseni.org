@@ -1,4 +1,4 @@
-import { UserId } from 'lucia';
+import { eq } from 'drizzle-orm';
 import { cookies } from 'next/headers';
 import { cache } from 'react';
 import 'server-only';
@@ -6,12 +6,14 @@ import 'server-only';
 import { lucia, validateRequest } from '@/lib/auth';
 import { AuthenticationError } from '@/lib/error';
 
+import { database, role, User } from '@/database';
+
 export const getCurrentUser = cache(async () => {
-    const session = await validateRequest();
-    if (!session.user) {
+    const { user } = await validateRequest();
+    if (!user) {
         return undefined;
     }
-    return session.user;
+    return user;
 });
 
 export const assertAuthenticated = async () => {
@@ -22,8 +24,25 @@ export const assertAuthenticated = async () => {
     return user;
 };
 
-export async function setSession(userId: UserId) {
-    const session = await lucia.createSession(userId, {
+export const checkRole = async () => {
+    const user = await assertAuthenticated();
+
+    const [admin] = await database
+        .select({
+            name: role.name,
+        })
+        .from(role)
+        .where(eq(role.id, user?.role));
+
+    return admin?.name !== 'admin';
+    // if (!isAdmin) {
+    //     throw new AuthorizationError();
+    // }
+    // return isAdmin;
+};
+
+export async function setSession(user: User) {
+    const session = await lucia.createSession(user.id, {
         expireIn: 60 * 60 * 24 * 30,
     });
     const sessionCookie = lucia.createSessionCookie(session.id);

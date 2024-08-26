@@ -2,25 +2,29 @@
 
 import { motion } from 'framer-motion';
 import { AlertTriangle } from 'lucide-react';
-import { NextPageContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+
+import { getStatusCode } from '@/lib/error';
 
 import { Button } from '@/components/ui/button';
 
 interface ErrorProps {
-    statusCode?: number;
+    error: Error & { digest?: string };
 }
 
-function Error({ statusCode }: ErrorProps) {
+function Error({ error }: ErrorProps) {
+    const statusCode = getStatusCode(error);
+
+    const errorTitle = `An Error Occurred: ${statusCode}`;
+    const errorDescription = error.message
+        ? error.message
+        : 'An unexpected error has occurred.';
+
     return (
         <>
             <Head>
-                <title>
-                    {statusCode
-                        ? `${statusCode} - Error Occurred`
-                        : 'An Error Occurred'}
-                </title>
+                <title>{errorTitle}</title>
             </Head>
             <main className='flex flex-col items-center justify-center min-h-screen bg-background text-foreground p-4 overflow-hidden'>
                 <motion.div
@@ -36,7 +40,7 @@ function Error({ statusCode }: ErrorProps) {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                 >
-                    Cosmic Glitch Detected
+                    {errorTitle}
                 </motion.h1>
                 <motion.p
                     className='text-xl mb-8 text-center max-w-md'
@@ -44,9 +48,7 @@ function Error({ statusCode }: ErrorProps) {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
                 >
-                    {statusCode
-                        ? `Houston, we've encountered a ${statusCode} anomaly.`
-                        : 'An unexpected error has warped our space-time continuum.'}
+                    {errorDescription}
                 </motion.p>
                 <Link href='/' passHref>
                     <motion.div
@@ -73,10 +75,5 @@ function Error({ statusCode }: ErrorProps) {
         </>
     );
 }
-
-Error.getInitialProps = ({ res, err }: NextPageContext) => {
-    const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-    return { statusCode };
-};
 
 export default Error;

@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 
-import { database, role, user } from '@/database';
+import { database, role, User, user } from '@/database';
 
 export type CreateUserProps = {
     accountId: string;
@@ -26,7 +26,7 @@ export async function createUser(
             accountType: type,
             accountId: data.accountId,
             email: data.email,
-            role: userRole.id,
+            roleId: userRole.id,
             name: data.name,
             avatar: data.avatar,
         })
@@ -45,16 +45,14 @@ export async function getUserByUserId(userId: string) {
 
 export async function createUserViaGithub(
     data: CreateUserProps,
-): Promise<string> {
-    const userCreated = await createUser(data, 'github');
-    return userCreated.id;
+): Promise<User> {
+    return await createUser(data, 'github');
 }
 
 export async function createUserViaGoogle(
     data: CreateUserProps,
-): Promise<string> {
-    const userCreated = await createUser(data, 'google');
-    return userCreated.id;
+): Promise<User> {
+    return await createUser(data, 'google');
 }
 
 export async function getUserByGoogleId(googleId: string) {

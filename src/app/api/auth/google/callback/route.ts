@@ -44,7 +44,7 @@ export async function GET(request: Request): Promise<Response> {
         const existingAccount = await getUserByGoogleId(googleUser.sub);
 
         if (existingAccount) {
-            await setSession(existingAccount.id);
+            await setSession(existingAccount);
             return new Response(null, {
                 status: 302,
                 headers: {
@@ -53,13 +53,13 @@ export async function GET(request: Request): Promise<Response> {
             });
         }
 
-        const userId = await createUserViaGoogle({
+        const user = await createUserViaGoogle({
             accountId: googleUser.sub,
             email: googleUser.email,
             name: googleUser.name,
             avatar: googleUser.picture,
         });
-        await setSession(userId);
+        await setSession(user);
         return new Response(null, {
             status: 302,
             headers: {

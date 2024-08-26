@@ -12,7 +12,7 @@ export const user = pgTable('users', {
     accountType: accountTypeEnum('account_type').notNull(),
     accountId: text('account_id').unique().notNull(),
     email: text('email').unique().notNull(),
-    role: uuid('role')
+    roleId: uuid('role_id')
         .notNull()
         .references(() => role.id),
     createdAt: timestamp('created_at').defaultNow().notNull(),

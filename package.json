@@ -5,6 +5,7 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
+        "start": "next start",
         "db:setup": "./scripts/setup.sh",
         "db:push": "drizzle-kit push --config=drizzle.config.ts",
         "db:migrate": "tsx ./src/database/migrate.ts",
@@ -25,6 +26,7 @@
     "dependencies": {
         "@lucia-auth/adapter-drizzle": "^1.1.0",
         "@next/env": "^14.2.6",
+        "@radix-ui/react-avatar": "^1.1.0",
         "@radix-ui/react-dialog": "^1.1.1",
         "@radix-ui/react-dropdown-menu": "^2.1.1",
         "@radix-ui/react-label": "^2.1.0",

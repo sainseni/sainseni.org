@@ -3,11 +3,10 @@ import { redirect } from 'next/navigation';
 
 import { validateRequest } from '@/lib/auth';
 
-import Footer from '@/components/public/footer';
-import Header from '@/components/public/header';
+import PrivateHeader from '@/components/private/header';
 
 export const metadata: Metadata = {
-    title: 'Signin | Sainseni Community',
+    title: 'Dashboard | Sainseni Community',
     authors: [
         {
             name: 'Khoironi Kurnia Syah',
@@ -17,22 +16,21 @@ export const metadata: Metadata = {
     description: 'Community for community',
 };
 
-export default async function AuthLayout({
+export default async function PrivateLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const { session } = await validateRequest();
+    const { session, user } = await validateRequest();
 
-    if (session) {
-        return redirect('/dashboard');
+    if (!session || !user) {
+        return redirect('/auth');
     }
 
     return (
         <div className='flex flex-col min-h-screen bg-white text-gray-800'>
-            <Header isSigned={!!session} />
+            <PrivateHeader />
             {children}
-            <Footer />
         </div>
     );
 }
