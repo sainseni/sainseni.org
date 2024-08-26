@@ -12,11 +12,11 @@ export async function createUser(
     data: CreateUserProps,
     type: 'google' | 'github',
 ) {
-    const userRole = await database.query.role.findFirst({
+    const memberRole = await database.query.role.findFirst({
         where: eq(role.name, 'user'),
     });
 
-    if (!userRole) {
+    if (!memberRole) {
         throw new Error('User role not found');
     }
 
@@ -26,7 +26,7 @@ export async function createUser(
             accountType: type,
             accountId: data.accountId,
             email: data.email,
-            roleId: userRole.id,
+            roleId: memberRole.id,
             name: data.name,
             avatar: data.avatar,
         })

@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-import * as table from '@/database/schema';
+import * as table from '@/database/tables';
 import env from '@/env';
 
 import { database, pg } from './index';
@@ -10,14 +10,14 @@ async function main() {
         throw new Error('Seed is only allowed in development environment');
     }
 
-    const [adminRole, userRole] = await database
+    const [adminRole, memberRole] = await database
         .insert(table.role)
         .values([
             {
                 name: 'admin',
             },
             {
-                name: 'user',
+                name: 'member',
             },
         ])
         .onConflictDoNothing()
@@ -38,7 +38,7 @@ async function main() {
                 email: 'prabowo@indonesia.go.id',
                 name: 'Prabowo Subianto',
                 accountType: 'github',
-                roleId: userRole.id,
+                roleId: memberRole.id,
             },
         ])
         .onConflictDoNothing()

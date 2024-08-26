@@ -4,8 +4,8 @@ import { Lucia } from 'lucia';
 import { cookies } from 'next/headers';
 import { cache } from 'react';
 
+import type { User as DatabaseUser } from '@/database';
 import { adapter } from '@/database';
-import type { User as DatabaseUser } from '@/database/schema';
 import env from '@/env';
 
 export * from './account';
@@ -20,7 +20,7 @@ export const lucia = new Lucia(adapter, {
     getUserAttributes: (attribute) => {
         return {
             id: attribute.id,
-            role: attribute.roleId,
+            roleId: attribute.roleId,
             name: attribute.name,
         };
     },
@@ -29,9 +29,14 @@ export const lucia = new Lucia(adapter, {
 declare module 'lucia' {
     interface Register {
         Lucia: typeof lucia;
-        DatabaseUserAttributes: DatabaseUser;
+        DatabaseUserAttributes: DatabaseUserAttributes;
     }
 }
+
+export type DatabaseUserAttributes = Pick<
+    DatabaseUser,
+    'id' | 'roleId' | 'name'
+>;
 
 export const validateRequest = cache(
     async (): Promise<

@@ -6,7 +6,7 @@ import 'server-only';
 import { lucia, validateRequest } from '@/lib/auth';
 import { AuthenticationError } from '@/lib/error';
 
-import { database, role, User } from '@/database';
+import { database, User } from '@/database';
 
 export const getCurrentUser = cache(async () => {
     const { user } = await validateRequest();
@@ -24,21 +24,14 @@ export const assertAuthenticated = async () => {
     return user;
 };
 
-export const checkRole = async () => {
+export const checkAdmin = async () => {
     const user = await assertAuthenticated();
 
-    const [admin] = await database
-        .select({
-            name: role.name,
-        })
-        .from(role)
-        .where(eq(role.id, user?.role));
+    const adminRole = await database.query.role.findFirst({
+        where: (role) => eq(role.id, user?.roleId),
+    });
 
-    return admin?.name !== 'admin';
-    // if (!isAdmin) {
-    //     throw new AuthorizationError();
-    // }
-    // return isAdmin;
+    return adminRole?.name !== 'admin';
 };
 
 export async function setSession(user: User) {

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
-import { validateRequest } from '@/lib/auth';
+import { checkAdmin, validateRequest } from '@/lib/auth';
 
 import PrivateHeader from '@/components/private/header';
 
@@ -27,9 +27,11 @@ export default async function PrivateLayout({
         return redirect('/auth/signin');
     }
 
+    const isAdmin = await checkAdmin();
+
     return (
         <div className='flex flex-col min-h-screen bg-white text-gray-800'>
-            <PrivateHeader />
+            <PrivateHeader isAdmin={isAdmin} userData={user} />
             {children}
         </div>
     );
