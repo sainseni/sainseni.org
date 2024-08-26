@@ -1,9 +1,7 @@
 'use client';
 
 import { Menu, Users } from 'lucide-react';
-import { useState } from 'react';
 
-import { useGetRoles } from '@/lib/queries/roles.query';
 import { useGetUsers } from '@/lib/queries/users.query';
 
 import { Button } from '@/components/ui/button';
@@ -29,25 +27,10 @@ import {
 import RoleFormDialog from './role-form';
 export default function Component() {
     const {
-        data: roleData,
-        isLoading: isRoleLoading,
-        error: roleError,
-    } = useGetRoles({});
-
-    const {
         data: userData,
-        isLoading: isuserLoading,
-        error: userError,
+        // isLoading: isuserLoading,
+        // error: userError,
     } = useGetUsers({});
-    const [newMember, setNewMember] = useState({
-        name: '',
-        email: '',
-        role: '',
-    });
-    const [newRole, setNewRole] = useState('');
-    const [editingRole, setEditingRole] = useState('');
-    console.error(userData, 'userData');
-
     return (
         <div className='container mx-auto p-4 space-y-8'>
             <header className='flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0'>

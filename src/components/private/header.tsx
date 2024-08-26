@@ -4,7 +4,7 @@ import { CircleUser, Menu, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { signOut } from '@/lib/actions/auth';
+import { signOut } from '@/lib/actions/auth.action';
 import { DatabaseUserAttributes } from '@/lib/auth';
 
 import { Button } from '@/components/ui/button';

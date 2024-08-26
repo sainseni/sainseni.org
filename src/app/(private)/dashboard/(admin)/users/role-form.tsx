@@ -10,7 +10,8 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
-import { useGetRoles } from '@/lib/queries/roles.query';
+import { useCreateRole, useDeleteRole, useEditRoleName } from '@/lib/mutations';
+import { useGetRoles } from '@/lib/queries';
 
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -26,6 +27,9 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function RoleFormDialog() {
+    const editMutation = useEditRoleName();
+    const createMutation = useCreateRole();
+    const deleteMutation = useDeleteRole();
     const [newRoleName, setNewRoleName] = useState('');
     const {
         data: roleData,
@@ -35,20 +39,17 @@ export default function RoleFormDialog() {
     } = useGetRoles({});
 
     const handleAddRole = () => {
-        // Implement add role logic here
-        console.log('Adding new role:', newRoleName);
+        createMutation.mutate(newRoleName);
         setNewRoleName('');
         refetchRoles();
     };
 
     const handleEditRole = (roleId: string) => {
-        // Implement edit role logic here
-        console.log('Editing role:', roleId);
+        editMutation.mutate({ roleId, name: 'new name' });
     };
 
     const handleDeleteRole = (roleId: string) => {
-        // Implement delete role logic here
-        console.log('Deleting role:', roleId);
+        deleteMutation.mutate(roleId);
         refetchRoles();
     };
 

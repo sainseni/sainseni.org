@@ -1,7 +1,13 @@
 import { z } from 'zod';
 
-export const RoleSearchSchema = z.object({
+export const SearchRoleSchema = z.object({
     name: z.string().optional(),
 });
 
-export type RoleSearch = z.infer<typeof RoleSearchSchema>;
+export const EditRoleNameSchema = z.object({
+    roleId: z.string(),
+    name: z.string(),
+});
+
+export type EditRoleName = z.infer<typeof EditRoleNameSchema>;
+export type SearchRole = z.infer<typeof SearchRoleSchema>;
