@@ -38,7 +38,7 @@ export default function RoleFormDialog() {
         refetch: refetchRoles,
     } = useGetRoles({});
 
-    const handleAddRole = () => {
+    const handleCreateRole = () => {
         createMutation.mutate(newRoleName);
         setNewRoleName('');
         refetchRoles();
@@ -68,7 +68,7 @@ export default function RoleFormDialog() {
                 <div className='space-y-4'>
                     <Card>
                         <CardHeader>
-                            <CardTitle>Add New Role</CardTitle>
+                            <CardTitle>Create New Role</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <div className='flex space-x-2'>
@@ -80,11 +80,11 @@ export default function RoleFormDialog() {
                                     }
                                 />
                                 <Button
-                                    onClick={handleAddRole}
+                                    onClick={handleCreateRole}
                                     disabled={!newRoleName.trim()}
                                 >
                                     <Plus className='h-4 w-4 mr-2' />
-                                    Add
+                                    Create
                                 </Button>
                             </div>
                         </CardContent>
