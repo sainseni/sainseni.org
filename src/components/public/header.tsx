@@ -34,8 +34,8 @@ export default function Navbar({ isSigned = false }: NavbarProps) {
     };
 
     return (
-        <header className='sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
-            <div className='container flex h-14 items-center justify-between'>
+        <header className='sticky top-0 z-50 px-4 md:px-8 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
+            <div className='flex h-14 items-center justify-between'>
                 <Link href='/' className='flex items-center space-x-2'>
                     <motion.span
                         initial={{ opacity: 0, y: -20 }}
@@ -108,7 +108,7 @@ export default function Navbar({ isSigned = false }: NavbarProps) {
                             ) : (
                                 <>
                                     <Link
-                                        href='/auth'
+                                        href='/auth/signin'
                                         onClick={() => setIsOpen(false)}
                                     >
                                         <Button className='w-full'>
@@ -151,11 +151,13 @@ export default function Navbar({ isSigned = false }: NavbarProps) {
                 >
                     {isSigned ? (
                         <>
-                            <Button size='sm'>Sign Out</Button>
+                            <Link href='/dashboard'>
+                                <Button size='sm'>Dashboard</Button>
+                            </Link>
                         </>
                     ) : (
                         <>
-                            <Link href='/auth'>
+                            <Link href='/auth/signin'>
                                 <Button size='sm'>Sign In</Button>
                             </Link>
                         </>
