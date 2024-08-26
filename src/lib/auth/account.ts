@@ -13,11 +13,11 @@ export async function createUser(
     type: 'google' | 'github',
 ) {
     const memberRole = await database.query.role.findFirst({
-        where: eq(role.name, 'user'),
+        where: eq(role.name, 'member'),
     });
 
     if (!memberRole) {
-        throw new Error('User role not found');
+        throw new Error('Member role not found');
     }
 
     const [userCreated] = await database
