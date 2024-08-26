@@ -12,10 +12,11 @@ export async function getUsers(search: UserSearch) {
             id: user.id,
             name: user.name,
             email: user.email,
+            roleId: user.roleId,
             roleName: role.name,
         })
         .from(user)
-        .fullJoin(role, eq(user.roleId, role.id))
+        .leftJoin(role, eq(user.roleId, role.id))
         .where(
             and(
                 search.name ? ilike(user.name, search.name) : undefined,
@@ -26,4 +27,13 @@ export async function getUsers(search: UserSearch) {
             ),
         )
         .orderBy(desc(user.createdAt));
+}
+
+export async function editUserRole(userId: string, roleId: string) {
+    return await database
+        .update(user)
+        .set({
+            roleId,
+        })
+        .where(eq(user.id, userId));
 }

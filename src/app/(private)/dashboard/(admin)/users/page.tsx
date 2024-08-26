@@ -1,20 +1,21 @@
 'use client';
 
-import { Menu, Users } from 'lucide-react';
+import { AlertCircle, Loader2, Users } from 'lucide-react';
 
+import { useEditUserRole } from '@/lib/mutations';
+import { useGetRoles } from '@/lib/queries';
 import { useGetUsers } from '@/lib/queries/users.query';
 
-import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 import {
     Table,
     TableBody,
@@ -23,14 +24,73 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
+import { useToast } from '@/components/ui/use-toast';
 
 import RoleFormDialog from './role-form';
-export default function Component() {
+
+export default function UserManagement() {
+    const { toast } = useToast();
+    const editUserRoleMutation = useEditUserRole();
+
     const {
         data: userData,
-        // isLoading: isuserLoading,
-        // error: userError,
+        isLoading: isUserLoading,
+        error: userError,
+        refetch: refetchUsers,
     } = useGetUsers({});
+
+    const {
+        data: roleData,
+        isLoading: isRoleLoading,
+        error: roleError,
+    } = useGetRoles({});
+
+    const handleRoleChange = (userId: string, newRoleId: string) => {
+        editUserRoleMutation.mutate(
+            { userId, roleId: newRoleId },
+            {
+                onSuccess: () => {
+                    refetchUsers();
+                    toast({
+                        title: 'Success',
+                        description: 'User role has been updated.',
+                    });
+                },
+                onError: () => {
+                    toast({
+                        title: 'Error',
+                        description:
+                            'Failed to update user role. Please try again.',
+                        variant: 'destructive',
+                    });
+                },
+            },
+        );
+    };
+
+    const isLoading = isUserLoading || isRoleLoading;
+    const error = userError || roleError;
+
+    if (isLoading) {
+        return (
+            <div className='flex justify-center items-center h-screen'>
+                <Loader2 className='h-8 w-8 animate-spin' />
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <Alert variant='destructive'>
+                <AlertCircle className='h-4 w-4' />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>
+                    Failed to load data. Please try again later.
+                </AlertDescription>
+            </Alert>
+        );
+    }
+
     return (
         <div className='container mx-auto p-4 space-y-8'>
             <header className='flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0'>
@@ -60,55 +120,55 @@ export default function Component() {
                                             Email
                                         </TableHead>
                                         <TableHead>Role</TableHead>
-                                        <TableHead className='text-right'>
-                                            Actions
-                                        </TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
                                     {userData &&
-                                        userData.map((member) => (
-                                            <TableRow key={member.id}>
+                                        userData.map((user) => (
+                                            <TableRow key={user.id}>
                                                 <TableCell className='font-medium'>
-                                                    {member.name}
+                                                    {user.name}
                                                 </TableCell>
                                                 <TableCell className='hidden sm:table-cell'>
-                                                    {member.email}
+                                                    {user.email}
                                                 </TableCell>
                                                 <TableCell>
-                                                    {member.roleName}
-                                                </TableCell>
-                                                <TableCell className='text-right'>
-                                                    <DropdownMenu>
-                                                        <DropdownMenuTrigger
-                                                            asChild
-                                                        >
-                                                            <Button
-                                                                variant='ghost'
-                                                                className='h-8 w-8 p-0'
-                                                            >
-                                                                <span className='sr-only'>
-                                                                    Open menu
-                                                                </span>
-                                                                <Menu className='h-4 w-4' />
-                                                            </Button>
-                                                        </DropdownMenuTrigger>
-                                                        <DropdownMenuContent align='end'>
-                                                            <DropdownMenuLabel>
-                                                                Actions
-                                                            </DropdownMenuLabel>
-                                                            <DropdownMenuItem>
-                                                                Edit User
-                                                            </DropdownMenuItem>
-                                                            <DropdownMenuItem>
-                                                                Change Role
-                                                            </DropdownMenuItem>
-                                                            <DropdownMenuSeparator />
-                                                            <DropdownMenuItem>
-                                                                Delete User
-                                                            </DropdownMenuItem>
-                                                        </DropdownMenuContent>
-                                                    </DropdownMenu>
+                                                    <Select
+                                                        defaultValue={
+                                                            user.roleId
+                                                        }
+                                                        onValueChange={(
+                                                            value,
+                                                        ) =>
+                                                            handleRoleChange(
+                                                                user.id,
+                                                                value,
+                                                            )
+                                                        }
+                                                    >
+                                                        <SelectTrigger className='w-[180px]'>
+                                                            <SelectValue placeholder='Select a role' />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            {roleData &&
+                                                                roleData.map(
+                                                                    (role) => (
+                                                                        <SelectItem
+                                                                            key={
+                                                                                role.id
+                                                                            }
+                                                                            value={
+                                                                                role.id
+                                                                            }
+                                                                        >
+                                                                            {
+                                                                                role.name
+                                                                            }
+                                                                        </SelectItem>
+                                                                    ),
+                                                                )}
+                                                        </SelectContent>
+                                                    </Select>
                                                 </TableCell>
                                             </TableRow>
                                         ))}

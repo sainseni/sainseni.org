@@ -6,4 +6,11 @@ export const UserSearchSchema = z.object({
     roleIds: z.array(z.string()).optional(),
 });
 
+export const EditUserRoleSchema = z.object({
+    userId: z.string(),
+    roleId: z.string(),
+});
+
+export type EditUserRole = z.infer<typeof EditUserRoleSchema>;
+
 export type UserSearch = z.infer<typeof UserSearchSchema>;
