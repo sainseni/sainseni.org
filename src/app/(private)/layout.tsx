@@ -24,7 +24,7 @@ export default async function PrivateLayout({
     const { session, user } = await validateRequest();
 
     if (!session || !user) {
-        return redirect('/auth');
+        return redirect('/auth/signin');
     }
 
     return (

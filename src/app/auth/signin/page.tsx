@@ -12,7 +12,7 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 
-export default function AuthPage() {
+export default function SigninPage() {
     return (
         <div className='flex-1 flex items-center justify-center bg-background p-4'>
             <motion.div

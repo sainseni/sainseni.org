@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     description: 'Community for community',
 };
 
-export default async function AuthLayout({
+export default async function SigninLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
