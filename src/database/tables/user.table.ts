@@ -1,7 +1,7 @@
 import { pgEnum, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { v7 as uuidv7 } from 'uuid';
 
-import { role } from '@/database/schema/role.schema';
+import { role } from '@/database/tables';
 
 export const accountTypeEnum = pgEnum('type', ['google', 'github']);
 
@@ -19,3 +19,4 @@ export const user = pgTable('users', {
 });
 
 export type User = typeof user.$inferSelect;
+export type ModifiedUser = Pick<User, 'name' | 'avatar' | 'email' | 'roleId'>;

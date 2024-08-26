@@ -4,7 +4,8 @@ import { CircleUser, Menu, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { signOut } from '@/lib/auth/action';
+import { signOut } from '@/lib/actions/auth.action';
+import { DatabaseUserAttributes } from '@/lib/auth';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -17,18 +18,24 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
-const navbarMenu = [
-    { name: 'Dashboard', url: '/dashboard' },
-    { name: 'Projects', url: '/dashboard/projects' },
-    { name: 'Friends', url: '/dashboard/friends' },
-    { name: 'References', url: '/dashboard/references' },
-    { name: 'Events', url: '/dashboard/events' },
-    { name: 'Users', url: '/dashboard/users' },
-    { name: 'Roles', url: '/dashboard/roles' },
-    { name: 'Keys', url: '/dashboard/keys' },
-];
+type PrivateHeaderProps = {
+    isAdmin: boolean;
+    userData: DatabaseUserAttributes;
+};
+export default function PrivateHeader({
+    isAdmin = false,
+    userData,
+}: PrivateHeaderProps) {
+    const navbarMenu = [
+        { name: 'Dashboard', url: '/dashboard', isAdmin: false },
+        { name: 'Projects', url: '/dashboard/projects', isAdmin: false },
+        { name: 'Friends', url: '/dashboard/friends', isAdmin: false },
+        { name: 'References', url: '/dashboard/references', isAdmin: false },
+        { name: 'Events', url: '/dashboard/events', isAdmin: false },
+        { name: 'Users', url: '/dashboard/users', isAdmin: true },
+        { name: 'Keys', url: '/dashboard/keys', isAdmin: true },
+    ];
 
-export default function PrivateHeader() {
     const pathname = usePathname();
 
     const isActive = (path: string) => {
@@ -42,25 +49,31 @@ export default function PrivateHeader() {
         <header className='sticky top-0 flex h-16 items-center justify-between border-b bg-background px-4 md:px-8'>
             <nav className='hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6'>
                 <Link
-                    href='/dashboard'
+                    href='/'
                     className='flex items-center gap-2 text-lg font-semibold md:text-base'
                 >
                     <Sparkles className='h-6 w-6' />
                     <span className='sr-only'>Sainseni</span>
                 </Link>
-                {navbarMenu.map((item) => (
-                    <Link
-                        key={item.url}
-                        href={item.url}
-                        className={`transition-colors hover:text-foreground ${
-                            isActive(item.url)
-                                ? 'text-foreground font-semibold'
-                                : 'text-muted-foreground'
-                        }`}
-                    >
-                        {item.name}
-                    </Link>
-                ))}
+                {navbarMenu
+                    .filter(
+                        (item) =>
+                            !isAdmin || // Show all menu if user is admin
+                            !item.isAdmin, // Show only non-admin menu
+                    )
+                    .map((item) => (
+                        <Link
+                            key={item.url}
+                            href={item.url}
+                            className={`transition-colors hover:text-foreground ${
+                                isActive(item.url)
+                                    ? 'text-foreground font-semibold'
+                                    : 'text-muted-foreground'
+                            }`}
+                        >
+                            {item.name}
+                        </Link>
+                    ))}
             </nav>
             <Sheet>
                 <SheetTrigger asChild>
@@ -110,7 +123,7 @@ export default function PrivateHeader() {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align='end'>
-                    <DropdownMenuLabel>My Name</DropdownMenuLabel>
+                    <DropdownMenuLabel>{userData.name}</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>Settings</DropdownMenuItem>
                     <DropdownMenuSeparator />
