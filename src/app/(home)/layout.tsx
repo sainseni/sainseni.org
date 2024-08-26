@@ -1,7 +1,7 @@
 import { validateRequest } from '@/lib/auth';
 
-import Footer from '@/components/common/footer';
-import Navbar from '@/components/common/navbar';
+import Footer from '@/components/public/footer';
+import Header from '@/components/public/header';
 
 type HomeLayoutProps = {
     children: React.ReactNode;
@@ -11,7 +11,7 @@ export default async function HomeLayout({ children }: HomeLayoutProps) {
 
     return (
         <div className='flex flex-col min-h-screen bg-white text-gray-800'>
-            <Navbar isSigned={!!user.session} />
+            <Header isSigned={!!user.session} />
             {children}
             <Footer />
         </div>

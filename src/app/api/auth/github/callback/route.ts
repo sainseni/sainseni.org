@@ -73,7 +73,7 @@ export async function GET(request: Request): Promise<Response> {
 
         const existingAccount = await getUserByGithubId(githubUser.id);
         if (existingAccount) {
-            await setSession(existingAccount.id);
+            await setSession(existingAccount);
             return new Response(null, {
                 status: 302,
                 headers: {
@@ -96,14 +96,14 @@ export async function GET(request: Request): Promise<Response> {
             githubUser.email = getPrimaryEmail(githubUserEmails);
         }
 
-        const userId = await createUserViaGithub({
+        const user = await createUserViaGithub({
             accountId: githubUser.id,
             email: githubUser.email,
             name: githubUser.name,
             avatar: githubUser.avatar_url,
         });
 
-        await setSession(userId);
+        await setSession(user);
         return new Response(null, {
             status: 302,
             headers: {

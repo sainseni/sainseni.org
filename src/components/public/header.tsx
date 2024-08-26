@@ -17,8 +17,6 @@ const navbarMenu = [
     { name: 'Projects', url: '/projects' },
     { name: 'Friends', url: '/friends' },
     { name: 'References', url: '/references' },
-    { name: 'About', url: '/about' },
-    { name: 'Blog', url: '/blog' },
 ];
 
 type NavbarProps = {
