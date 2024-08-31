@@ -25,7 +25,7 @@ export default function AllReferenceTable() {
             <CardHeader className='flex flex-row items-center'>
                 <div className='grid gap-2'>
                     <CardTitle>References</CardTitle>
-                    <CardDescription>Recent added</CardDescription>
+                    <CardDescription>Recently added.</CardDescription>
                 </div>
                 <Button asChild size='sm' className='ml-auto gap-1'>
                     <Link href='#'>
