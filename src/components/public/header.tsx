@@ -35,7 +35,7 @@ export default function Navbar({ isSigned = false }: NavbarProps) {
 
     return (
         <header className='sticky top-0 z-50 px-4 md:px-8 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
-            <div className='flex h-14 items-center justify-between'>
+            <div className='container flex h-14 items-center justify-between'>
                 <Link href='/' className='flex items-center space-x-2'>
                     <motion.span
                         initial={{ opacity: 0, y: -20 }}
@@ -98,12 +98,14 @@ export default function Navbar({ isSigned = false }: NavbarProps) {
                         >
                             {isSigned ? (
                                 <>
-                                    <Button
-                                        className='w-full'
+                                    <Link
+                                        href='/dashboard'
                                         onClick={() => setIsOpen(false)}
                                     >
-                                        Sign Out
-                                    </Button>
+                                        <Button className='w-full'>
+                                            Dashboard
+                                        </Button>
+                                    </Link>
                                 </>
                             ) : (
                                 <>

@@ -1,12 +1,19 @@
 'use server';
 
-import { and, desc, eq, ilike, inArray } from 'drizzle-orm';
+import { and, desc, eq, ilike, inArray, ne } from 'drizzle-orm';
 
+import { checkAdmin } from '@/lib/auth';
 import { UserSearch } from '@/lib/schema';
 
 import { database, role, user } from '@/database';
 
 export async function getUsers(search: UserSearch) {
+    const { user: currentUser, isAdmin } = await checkAdmin();
+
+    if (!isAdmin) {
+        return [];
+    }
+
     return await database
         .select({
             id: user.id,
@@ -24,16 +31,24 @@ export async function getUsers(search: UserSearch) {
                 search.roleIds
                     ? inArray(user.roleId, search.roleIds)
                     : undefined,
+                ne(user.id, currentUser?.id),
             ),
         )
-        .orderBy(desc(user.createdAt));
+        .orderBy(desc(user.updatedAt), desc(user.createdAt));
 }
 
 export async function editUserRole(userId: string, roleId: string) {
+    const { isAdmin } = await checkAdmin();
+
+    if (!isAdmin) {
+        return;
+    }
+
     return await database
         .update(user)
         .set({
             roleId,
+            updatedAt: new Date(),
         })
         .where(eq(user.id, userId));
 }
