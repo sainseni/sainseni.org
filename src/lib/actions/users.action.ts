@@ -48,6 +48,7 @@ export async function editUserRole(userId: string, roleId: string) {
         .update(user)
         .set({
             roleId,
+            updatedAt: new Date(),
         })
         .where(eq(user.id, userId));
 }
