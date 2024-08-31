@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 
 import { checkAdmin, validateRequest } from '@/lib/auth';
 
+import Container from '@/components/common/container';
 import PrivateHeader from '@/components/private/header';
 
 export const metadata: Metadata = {
@@ -27,12 +28,12 @@ export default async function PrivateLayout({
         return redirect('/auth/signin');
     }
 
-    const isAdmin = await checkAdmin();
+    const { isAdmin } = await checkAdmin();
 
     return (
         <div className='flex flex-col min-h-screen bg-white text-gray-800'>
             <PrivateHeader isAdmin={isAdmin} userData={user} />
-            {children}
+            <Container>{children}</Container>
         </div>
     );
 }

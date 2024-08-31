@@ -22,6 +22,7 @@ export const lucia = new Lucia(adapter, {
             id: attribute.id,
             roleId: attribute.roleId,
             name: attribute.name,
+            avatar: attribute.avatar,
         };
     },
 });
@@ -35,7 +36,7 @@ declare module 'lucia' {
 
 export type DatabaseUserAttributes = Pick<
     DatabaseUser,
-    'id' | 'roleId' | 'name'
+    'id' | 'roleId' | 'name' | 'avatar'
 >;
 
 export const validateRequest = cache(

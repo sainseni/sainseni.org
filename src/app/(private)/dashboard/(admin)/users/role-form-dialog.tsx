@@ -222,7 +222,7 @@ export default function RoleFormDialog() {
                                                                 role.id,
                                                             )
                                                         }
-                                                        className='w-1/2 focus-visible:ring-0'
+                                                        className='w-1/2'
                                                     />
                                                 ) : (
                                                     <span>{role.name}</span>
@@ -259,7 +259,7 @@ export default function RoleFormDialog() {
                                                                     handleCancelEdit
                                                                 }
                                                             >
-                                                                <X className='h-4 w-4' />
+                                                                <X className='h-4 w-4 text-red-500' />
                                                                 <span className='sr-only'>
                                                                     Cancel
                                                                 </span>
@@ -300,7 +300,7 @@ export default function RoleFormDialog() {
                                                                     role.id ? (
                                                                     <Loader2 className='h-4 w-4 animate-spin' />
                                                                 ) : (
-                                                                    <Trash2 className='h-4 w-4' />
+                                                                    <Trash2 className='h-4 w-4 text-red-500' />
                                                                 )}
                                                                 <span className='sr-only'>
                                                                     Delete{' '}

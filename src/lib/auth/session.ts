@@ -31,7 +31,10 @@ export const checkAdmin = async () => {
         where: (role) => eq(role.id, user?.roleId),
     });
 
-    return adminRole?.name !== 'admin';
+    return {
+        user,
+        isAdmin: adminRole?.name == 'admin',
+    };
 };
 
 export async function setSession(user: User) {
