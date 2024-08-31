@@ -92,76 +92,86 @@ export default function UserManagement() {
     }
 
     return (
-        <Card>
-            <CardHeader className='flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0'>
-                <h1 className='text-2xl font-bold flex items-center gap-2'>
-                    <Users className='h-6 w-6' />
-                    Users
-                </h1>
-                <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto'>
-                    <RoleFormDialog />
-                </div>
-            </CardHeader>
-            <CardContent>
-                <ScrollArea className='h-[300px] sm:h-[400px]'>
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className='w-[200px]'>
-                                    Name
-                                </TableHead>
-                                <TableHead className='hidden sm:table-cell'>
-                                    Email
-                                </TableHead>
-                                <TableHead>Role</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {userData &&
-                                userData.map((user) => (
-                                    <TableRow key={user.id}>
-                                        <TableCell className='font-medium'>
-                                            {user.name}
-                                        </TableCell>
-                                        <TableCell className='hidden sm:table-cell'>
-                                            {user.email}
-                                        </TableCell>
-                                        <TableCell>
-                                            <Select
-                                                defaultValue={user.roleId}
-                                                onValueChange={(value) =>
-                                                    handleRoleChange(
-                                                        user.id,
-                                                        value,
-                                                    )
-                                                }
-                                                disabled={
-                                                    editUserRoleMutation.isPending
-                                                }
-                                            >
-                                                <SelectTrigger className='w-[180px]'>
-                                                    <SelectValue placeholder='Select a role' />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    {roleData &&
-                                                        roleData.map((role) => (
-                                                            <SelectItem
-                                                                className='focus-visible:ring-0'
-                                                                key={role.id}
-                                                                value={role.id}
-                                                            >
-                                                                {role.name}
-                                                            </SelectItem>
-                                                        ))}
-                                                </SelectContent>
-                                            </Select>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                        </TableBody>
-                    </Table>
-                </ScrollArea>
-            </CardContent>
-        </Card>
+        <div className='flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8'>
+            <Card>
+                <CardHeader className='flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0'>
+                    <h1 className='text-2xl font-bold flex items-center gap-2'>
+                        <Users className='h-6 w-6' />
+                        Users
+                    </h1>
+                    <div className='flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto'>
+                        <RoleFormDialog />
+                    </div>
+                </CardHeader>
+                <CardContent>
+                    <ScrollArea className='h-[300px] sm:h-[400px]'>
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead className='w-[200px]'>
+                                        Name
+                                    </TableHead>
+                                    <TableHead className='hidden sm:table-cell'>
+                                        Email
+                                    </TableHead>
+                                    <TableHead>Role</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                                {userData &&
+                                    userData.map((user) => (
+                                        <TableRow key={user.id}>
+                                            <TableCell className='font-medium'>
+                                                {user.name}
+                                            </TableCell>
+                                            <TableCell className='hidden sm:table-cell'>
+                                                {user.email}
+                                            </TableCell>
+                                            <TableCell>
+                                                <Select
+                                                    defaultValue={user.roleId}
+                                                    onValueChange={(value) =>
+                                                        handleRoleChange(
+                                                            user.id,
+                                                            value,
+                                                        )
+                                                    }
+                                                    disabled={
+                                                        editUserRoleMutation.isPending
+                                                    }
+                                                >
+                                                    <SelectTrigger className='w-[180px]'>
+                                                        <SelectValue placeholder='Select a role' />
+                                                    </SelectTrigger>
+                                                    <SelectContent>
+                                                        {roleData &&
+                                                            roleData.map(
+                                                                (role) => (
+                                                                    <SelectItem
+                                                                        className='focus-visible:ring-0'
+                                                                        key={
+                                                                            role.id
+                                                                        }
+                                                                        value={
+                                                                            role.id
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            role.name
+                                                                        }
+                                                                    </SelectItem>
+                                                                ),
+                                                            )}
+                                                    </SelectContent>
+                                                </Select>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                            </TableBody>
+                        </Table>
+                    </ScrollArea>
+                </CardContent>
+            </Card>
+        </div>
     );
 }

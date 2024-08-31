@@ -16,6 +16,7 @@ export const user = pgTable('users', {
         .notNull()
         .references(() => role.id),
     createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
 export type User = typeof user.$inferSelect;

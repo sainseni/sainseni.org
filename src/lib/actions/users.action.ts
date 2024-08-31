@@ -34,7 +34,7 @@ export async function getUsers(search: UserSearch) {
                 ne(user.id, currentUser?.id),
             ),
         )
-        .orderBy(desc(user.createdAt));
+        .orderBy(desc(user.updatedAt), desc(user.createdAt));
 }
 
 export async function editUserRole(userId: string, roleId: string) {
