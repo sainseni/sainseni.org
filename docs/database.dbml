@@ -1,6 +1,0 @@
-Project Sainseni {
-    database_type: 'PostgreSQL'
-    Note: '''
-        Sainseni
-    '''
-}
